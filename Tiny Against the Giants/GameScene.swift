@@ -26,7 +26,7 @@ class GameScene: SKScene {
   }
   
   func getPerlinNoiseMap(frequency: Double, octaveCount: Int = 6, persistence: Double = 0.5, lacunarity: Double = 2.0) -> GKNoiseMap {
-    let seed: Int32 = 10
+    let seed: Int32 = Int32(GKRandomSource.sharedRandom().nextInt())
     let noiseSource = GKPerlinNoiseSource(frequency: frequency, octaveCount: octaveCount, persistence: persistence, lacunarity: lacunarity, seed: seed)
     let noise = GKNoise(noiseSource)
     let noiseMap = GKNoiseMap(noise)
@@ -42,7 +42,7 @@ class GameScene: SKScene {
       tileMap?.enableAutomapping = true
       tileMap?.position = CGPoint.zero
 
-      let noiseMap = getPerlinNoiseMap(frequency: 40)
+      let noiseMap = getPerlinNoiseMap(frequency: 10)
       
       for column in stride(from: 0, to: 42, by: 1) {
         for row in stride(from: 0, to: 32, by: 1) {
@@ -54,6 +54,12 @@ class GameScene: SKScene {
     }
 
     return tileMap
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    landBackground.removeFromParent()
+    landBackground = getLandBackground()
+    addChild(landBackground)
   }
   
   override func update(_ currentTime: TimeInterval) {
