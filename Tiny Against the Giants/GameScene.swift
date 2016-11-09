@@ -20,10 +20,68 @@ class GameScene: SKScene {
   
   override func sceneDidLoad() {
     
-    self.lastUpdateTime = 0
-    self.landBackground = getLandBackground()
-    self.addChild(landBackground)
+    lastUpdateTime = 0
+    landBackground = getLandBackground()
+    landBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground))
+    landBackground.physicsBody?.isDynamic = false
+    addChild(landBackground)
   }
+  
+  func getPhysicsBodiesFromTileMapNode(tileMapNode: SKTileMapNode) -> [SKPhysicsBody] {
+    var physicsBodies = [SKPhysicsBody]()
+    
+    for column in 0..<tileMapNode.numberOfColumns {
+      for row in 0..<tileMapNode.numberOfRows {
+        if let tileDefinition = tileMapNode.tileDefinition(atColumn: column, row: row) {
+          var tileDefinitionPhysicsBody: SKPhysicsBody?
+          
+          switch tileDefinition.name! {
+          case "BottomCenter":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 1, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: 0, y: tileDefinition.size.height * 0.25)))
+          case "TopCenter":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 1, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: 0, y: -tileDefinition.size.height * 0.25)))
+          case "CenterLeft":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 1)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: tileDefinition.size.height * 0.25, y: 0)))
+          case "CenterRight":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 1)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: -tileDefinition.size.height * 0.25, y: 0)))
+          case "TopLeft":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: tileDefinition.size.height * 0.25, y: -tileDefinition.size.height * 0.25)))
+          case "TopRight":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: -tileDefinition.size.height * 0.25, y: -tileDefinition.size.height * 0.25)))
+          case "BottomLeft":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: tileDefinition.size.height * 0.25, y: tileDefinition.size.height * 0.25)))
+          case "BottomRight":
+            tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: -tileDefinition.size.height * 0.25, y: tileDefinition.size.height * 0.25)))
+          case "BottomRightCorner":
+            let rightPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: tileDefinition.size.height * 0.25, y: tileDefinition.size.height * 0.25)))
+            let bottomPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: -tileDefinition.size.height * 0.25, y: -tileDefinition.size.height * 0.25)))
+            tileDefinitionPhysicsBody = SKPhysicsBody(bodies: [rightPhysicsBody, bottomPhysicsBody])
+          case "BottomLeftCorner":
+            let leftPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: -tileDefinition.size.height * 0.25, y: tileDefinition.size.height * 0.25)))
+            let bottomPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: tileDefinition.size.height * 0.25, y: -tileDefinition.size.height * 0.25)))
+            tileDefinitionPhysicsBody = SKPhysicsBody(bodies: [leftPhysicsBody, bottomPhysicsBody])
+          case "TopLeftCorner":
+            let leftPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: -tileDefinition.size.height * 0.25, y: -tileDefinition.size.height * 0.25)))
+            let topPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: tileDefinition.size.height * 0.25, y: tileDefinition.size.height * 0.25)))
+            tileDefinitionPhysicsBody = SKPhysicsBody(bodies: [leftPhysicsBody, topPhysicsBody])
+          case "TopRightCorner":
+            let rightPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: tileDefinition.size.height * 0.25, y: -tileDefinition.size.height * 0.25)))
+            let topPhysicsBody = SKPhysicsBody(rectangleOf: tileDefinition.size.applying(CGAffineTransform(scaleX: 0.5, y: 0.5)), center: tileMapNode.centerOfTile(atColumn: column, row: row).applying(CGAffineTransform(translationX: -tileDefinition.size.height * 0.25, y: tileDefinition.size.height * 0.25)))
+            tileDefinitionPhysicsBody = SKPhysicsBody(bodies: [rightPhysicsBody, topPhysicsBody])
+          default:
+            break
+          }
+          
+          if let physicsBody = tileDefinitionPhysicsBody {
+            physicsBodies.append(physicsBody)
+          }
+        }
+      }
+    }
+    
+    return physicsBodies
+  }
+  
   
   func getPerlinNoiseMap(frequency: Double, octaveCount: Int = 6, persistence: Double = 0.5, lacunarity: Double = 2.0) -> GKNoiseMap {
     let seed: Int32 = Int32(GKRandomSource.sharedRandom().nextInt())
@@ -59,6 +117,8 @@ class GameScene: SKScene {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     landBackground.removeFromParent()
     landBackground = getLandBackground()
+    landBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground))
+    landBackground.physicsBody?.isDynamic = false
     addChild(landBackground)
   }
   
