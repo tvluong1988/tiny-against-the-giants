@@ -17,6 +17,7 @@ class GameScene: SKScene {
   private var lastUpdateTime : TimeInterval = 0
   
   var landBackground: SKTileMapNode!
+  var ball: SKSpriteNode!
   
   override func sceneDidLoad() {
     
@@ -25,6 +26,12 @@ class GameScene: SKScene {
     landBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground))
     landBackground.physicsBody?.isDynamic = false
     addChild(landBackground)
+    
+    ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
+    ball.position = CGPoint.zero
+    ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
+    ball.physicsBody?.isDynamic = true
+    addChild(ball)
   }
   
   func getPhysicsBodyFromTileDefinition(tileDefinition: SKTileDefinition, center: CGPoint) -> SKPhysicsBody? {
@@ -131,6 +138,16 @@ class GameScene: SKScene {
     landBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground))
     landBackground.physicsBody?.isDynamic = false
     addChild(landBackground)
+    
+    ball.removeFromParent()
+    ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
+    
+    let column = GKRandomSource.sharedRandom().nextInt(upperBound: landBackground.numberOfColumns)
+    let row = GKRandomSource.sharedRandom().nextInt(upperBound: landBackground.numberOfRows)
+    ball.position = landBackground.centerOfTile(atColumn: column, row: row)
+    ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
+    ball.physicsBody?.isDynamic = true
+    addChild(ball)
   }
   
   override func update(_ currentTime: TimeInterval) {
