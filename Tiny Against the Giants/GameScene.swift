@@ -18,6 +18,7 @@ class GameScene: SKScene {
   
   var landBackground: SKTileMapNode!
   var ball: SKSpriteNode!
+  var cam: SKCameraNode!
   
   override func sceneDidLoad() {
     
@@ -32,6 +33,11 @@ class GameScene: SKScene {
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
     addChild(ball)
+    
+    cam = SKCameraNode()
+    cam.position = ball.position
+    self.camera = cam
+    addChild(cam)
   }
   
   func getPhysicsBodyFromTileDefinition(tileDefinition: SKTileDefinition, center: CGPoint) -> SKPhysicsBody? {
@@ -152,6 +158,8 @@ class GameScene: SKScene {
   
   override func update(_ currentTime: TimeInterval) {
     // Called before each frame is rendered
+    
+    cam.position = ball.position
     
     // Initialize _lastUpdateTime if it has not already been
     if lastUpdateTime == 0 {
