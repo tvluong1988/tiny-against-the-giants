@@ -17,22 +17,32 @@ class GameScene: SKScene {
   private var lastUpdateTime : TimeInterval = 0
   
   var landBackground: SKTileMapNode!
+  var landBackground2: SKTileMapNode!
+  var landBackground3: SKTileMapNode!
+
   var ball: SKSpriteNode!
   var cam: SKCameraNode!
   
   override func sceneDidLoad() {
-    
+    physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
     lastUpdateTime = 0
     landBackground = getLandBackground()
     landBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground))
     landBackground.physicsBody?.isDynamic = false
     addChild(landBackground)
     
+    landBackground2 = getLandBackground()
+    landBackground2.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground2))
+    landBackground2.physicsBody?.isDynamic = false
+    landBackground2.position = CGPoint(x: landBackground.frame.midX, y: landBackground.frame.midY - landBackground.frame.height)
+    addChild(landBackground2)
+    
     ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
     ball.position = CGPoint.zero
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
     addChild(ball)
+    ball.physicsBody?.applyForce(CGVector(dx: 100, dy: -100))
     
     cam = SKCameraNode()
     cam.position = ball.position
@@ -51,6 +61,8 @@ class GameScene: SKScene {
 
     
     switch tileDefinition.name! {
+    case "CenterCenter":
+      tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileSize, center: center)
     case "BottomCenter":
       tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileSize.applying(scaleYHalfTransform), center: center.applying(CGAffineTransform(translationX: 0, y: tileTranslation)))
     case "TopCenter":
@@ -140,12 +152,22 @@ class GameScene: SKScene {
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     landBackground.removeFromParent()
+    landBackground = nil
     landBackground = getLandBackground()
     landBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground))
     landBackground.physicsBody?.isDynamic = false
     addChild(landBackground)
     
+    landBackground2.removeFromParent()
+    landBackground2 = nil
+    landBackground2 = getLandBackground()
+    landBackground2.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground2))
+    landBackground2.physicsBody?.isDynamic = false
+    landBackground2.position = CGPoint(x: landBackground.frame.midX, y: landBackground.frame.midY - landBackground.frame.height)
+    addChild(landBackground2)
+    
     ball.removeFromParent()
+    ball = nil
     ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
     
     let column = GKRandomSource.sharedRandom().nextInt(upperBound: landBackground.numberOfColumns)
@@ -154,6 +176,7 @@ class GameScene: SKScene {
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
     addChild(ball)
+    ball.physicsBody?.applyForce(CGVector(dx: 100, dy: -100))
   }
   
   override func update(_ currentTime: TimeInterval) {
