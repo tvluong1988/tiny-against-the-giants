@@ -16,8 +16,9 @@ class GameScene: SKScene {
   
   private var lastUpdateTime : TimeInterval = 0
   
-  var landBackground: SKTileMapNode!
-
+  var previousLandBackground: SKTileMapNode!
+  var nextLandBackground: SKTileMapNode!
+  var currentLandBackground: SKTileMapNode!
   var ball: SKSpriteNode!
   var cam: SKCameraNode!
   
@@ -25,19 +26,35 @@ class GameScene: SKScene {
     physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
     lastUpdateTime = 0
     addTileMap()
+    addNextTileMap()
     addBall()
     addCamera()
   }
   
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    resetTileMap()
-    resetBall()
+  override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    if let touch = touches.first {
+      let touchLocation = touch.location(in: self.view)
+      let previousTouchLocation = touch.previousLocation(in: self.view)
+      
+      let xDirection = touchLocation.x - previousTouchLocation.x
+      if xDirection < 0 {
+        ball.physicsBody?.applyForce(CGVector(dx: -50, dy: 0))
+      } else {
+        ball.physicsBody?.applyForce(CGVector(dx: 50, dy: 0))
+      }
+    }
   }
   
   override func update(_ currentTime: TimeInterval) {
     // Called before each frame is rendered
     
     cam.position = ball.position
+    
+    if !cam.contains(currentLandBackground) {
+      previousLandBackground = currentLandBackground
+      currentLandBackground = nextLandBackground
+      addNextTileMap()
+    }
     
     // Initialize _lastUpdateTime if it has not already been
     if lastUpdateTime == 0 {
@@ -57,6 +74,21 @@ class GameScene: SKScene {
 }
 
 fileprivate extension GameScene {
+  func translateTileMap() {
+    resetTileMap()
+    currentLandBackground.position.y = -currentLandBackground.frame.height
+  }
+  
+  func addNextTileMap() {
+    nextLandBackground = getLandBackground()
+    nextLandBackground.anchorPoint = CGPoint(x: 0, y: 1)
+    nextLandBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: nextLandBackground))
+    nextLandBackground.physicsBody?.isDynamic = false
+    addChild(nextLandBackground)
+    
+    nextLandBackground.position.y = currentLandBackground.frame.minY
+  }
+  
   func addCamera() {
     cam = SKCameraNode()
     cam.position = ball.position
@@ -65,18 +97,20 @@ fileprivate extension GameScene {
   }
   
   func addTileMap() {
-    landBackground = getLandBackground()
-    landBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: landBackground))
-    landBackground.physicsBody?.isDynamic = false
-    addChild(landBackground)
+    currentLandBackground = getLandBackground()
+    currentLandBackground.anchorPoint = CGPoint(x: 0, y: 1)
+    currentLandBackground.position = CGPoint.zero
+    currentLandBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: currentLandBackground))
+    currentLandBackground.physicsBody?.isDynamic = false
+    addChild(currentLandBackground)
   }
   
   func addBall() {
     ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
     
-    let column = GKRandomSource.sharedRandom().nextInt(upperBound: landBackground.numberOfColumns)
-    let row = GKRandomSource.sharedRandom().nextInt(upperBound: landBackground.numberOfRows)
-    ball.position = landBackground.centerOfTile(atColumn: column, row: row)
+    let column = GKRandomSource.sharedRandom().nextInt(upperBound: currentLandBackground.numberOfColumns)
+    let row = GKRandomSource.sharedRandom().nextInt(upperBound: currentLandBackground.numberOfRows)
+    ball.position = currentLandBackground.centerOfTile(atColumn: column, row: row)
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
     addChild(ball)
@@ -84,9 +118,9 @@ fileprivate extension GameScene {
   }
   
   func resetTileMap() {
-    if landBackground.parent != nil {
-      landBackground.removeFromParent()
-      landBackground = nil
+    if currentLandBackground.parent != nil {
+      currentLandBackground.removeFromParent()
+      currentLandBackground = nil
     }
     
     addTileMap()
