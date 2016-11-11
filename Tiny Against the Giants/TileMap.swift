@@ -20,9 +20,15 @@ func getLandBackground() -> SKTileMapNode? {
     
     for column in stride(from: 0, to: 42, by: 1) {
       for row in stride(from: 0, to: 32, by: 1) {
-        if noiseMap.value(at: vector_int2(Int32(column), Int32(row))) > 0.6 {
+        if noiseMap.value(at: vector_int2(Int32(column), Int32(row))) > 0.65 {
           tileMap?.setTileGroup(tileSet.tileGroups.first!, forColumn: column, row: row)
         }
+      }
+    }
+    
+    for column in [0, 41] {
+      for row in stride(from: 0, to: 32, by: 1) {
+        tileMap?.setTileGroup(tileSet.tileGroups.first!, forColumn: column, row: row)
       }
     }
   }

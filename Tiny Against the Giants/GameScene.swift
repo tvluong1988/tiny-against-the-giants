@@ -38,9 +38,9 @@ class GameScene: SKScene {
       
       let xDirection = touchLocation.x - previousTouchLocation.x
       if xDirection < 0 {
-        ball.physicsBody?.applyForce(CGVector(dx: -50, dy: 0))
+        ball.physicsBody?.applyForce(CGVector(dx: -50, dy: -30))
       } else {
-        ball.physicsBody?.applyForce(CGVector(dx: 50, dy: 0))
+        ball.physicsBody?.applyForce(CGVector(dx: 50, dy: -30))
       }
     }
   }
