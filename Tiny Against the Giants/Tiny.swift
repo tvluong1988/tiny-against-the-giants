@@ -10,12 +10,11 @@ import GameplayKit
 
 class Tiny: GKEntity {
   // MARK: Lifecycle
-  init(node: SKSpriteNode) {
+  init(node: SKSpriteNode, team: Team) {
     super.init()
     
-    let spriteComponent = SpriteComponent(node: node)
-    addComponent(spriteComponent)
-    addComponent(PlayerComponent())
+    addComponent(SpriteComponent(node: node))
+    addComponent(TeamComponent(team: team))
   }
   
   required init?(coder aDecoder: NSCoder) {

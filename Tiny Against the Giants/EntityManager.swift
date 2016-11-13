@@ -22,7 +22,7 @@ class EntityManager {
 extension EntityManager {
   func entitiesForPlayer() -> [GKEntity] {
     return entities.flatMap { entity in
-      if let _ = entity.component(ofType: PlayerComponent.self) {
+      if let teamComponent = entity.component(ofType: TeamComponent.self), teamComponent.team == .Team1 {
         return entity
       }
       

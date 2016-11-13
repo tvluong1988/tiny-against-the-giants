@@ -93,7 +93,7 @@ fileprivate extension GameScene {
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
     
-    let ballEntity = Tiny(node: ball)
+    let ballEntity = Tiny(node: ball, team: .Team1)
     entityManager.add(entity: ballEntity)
   }
   
