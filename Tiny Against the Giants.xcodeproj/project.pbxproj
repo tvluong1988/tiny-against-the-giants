@@ -11,6 +11,10 @@
 		8B7408D91DD5334A004139E7 /* TileMapPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */; };
 		8B7408DB1DD5343E004139E7 /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408DA1DD5343E004139E7 /* TileMap.swift */; };
 		8B838F461DC6F6A5007B70F0 /* BasicTile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8B838F451DC6F6A5007B70F0 /* BasicTile.sks */; };
+		8B9CCA761DD8DFDE00A9242C /* Tiny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA751DD8DFDE00A9242C /* Tiny.swift */; };
+		8B9CCA781DD8E16700A9242C /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA771DD8E16700A9242C /* SpriteComponent.swift */; };
+		8B9CCA7A1DD8E2BA00A9242C /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA791DD8E2BA00A9242C /* EntityManager.swift */; };
+		8B9CCA7C1DD8E68800A9242C /* PlayerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA7B1DD8E68800A9242C /* PlayerComponent.swift */; };
 		8BFF551F1DC6DF8300BB51C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */; };
 		8BFF55211DC6DF8300BB51C5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF55201DC6DF8300BB51C5 /* GameScene.sks */; };
 		8BFF55251DC6DF8300BB51C5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF55241DC6DF8300BB51C5 /* GameScene.swift */; };
@@ -44,6 +48,10 @@
 		8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMapPhysics.swift; sourceTree = "<group>"; };
 		8B7408DA1DD5343E004139E7 /* TileMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
 		8B838F451DC6F6A5007B70F0 /* BasicTile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BasicTile.sks; sourceTree = "<group>"; };
+		8B9CCA751DD8DFDE00A9242C /* Tiny.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tiny.swift; sourceTree = "<group>"; };
+		8B9CCA771DD8E16700A9242C /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
+		8B9CCA791DD8E2BA00A9242C /* EntityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		8B9CCA7B1DD8E68800A9242C /* PlayerComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerComponent.swift; sourceTree = "<group>"; };
 		8BFF551B1DC6DF8300BB51C5 /* Tiny Against the Giants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tiny Against the Giants.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BFF55201DC6DF8300BB51C5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -121,6 +129,10 @@
 				8B7408D61DD53304004139E7 /* NoiseMap.swift */,
 				8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */,
 				8B7408DA1DD5343E004139E7 /* TileMap.swift */,
+				8B9CCA751DD8DFDE00A9242C /* Tiny.swift */,
+				8B9CCA771DD8E16700A9242C /* SpriteComponent.swift */,
+				8B9CCA791DD8E2BA00A9242C /* EntityManager.swift */,
+				8B9CCA7B1DD8E68800A9242C /* PlayerComponent.swift */,
 			);
 			path = "Tiny Against the Giants";
 			sourceTree = "<group>";
@@ -299,8 +311,12 @@
 			files = (
 				8BFF55251DC6DF8300BB51C5 /* GameScene.swift in Sources */,
 				8B7408D71DD53304004139E7 /* NoiseMap.swift in Sources */,
+				8B9CCA7A1DD8E2BA00A9242C /* EntityManager.swift in Sources */,
+				8B9CCA781DD8E16700A9242C /* SpriteComponent.swift in Sources */,
 				8B7408D91DD5334A004139E7 /* TileMapPhysics.swift in Sources */,
 				8BFF55271DC6DF8300BB51C5 /* GameViewController.swift in Sources */,
+				8B9CCA7C1DD8E68800A9242C /* PlayerComponent.swift in Sources */,
+				8B9CCA761DD8DFDE00A9242C /* Tiny.swift in Sources */,
 				8B7408DB1DD5343E004139E7 /* TileMap.swift in Sources */,
 				8BFF551F1DC6DF8300BB51C5 /* AppDelegate.swift in Sources */,
 			);
