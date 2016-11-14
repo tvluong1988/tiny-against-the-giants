@@ -19,15 +19,17 @@ class GameScene: SKScene {
   var cam: SKCameraNode!
   
   private var lastUpdateTime: TimeInterval = 0
-  private var giantSpawnRate: TimeInterval = 3
+  private var giantSpawnCooldown: TimeInterval = 3
+  private var giantSpawnTime: TimeInterval = 0
   
   override func sceneDidLoad() {
+    super.sceneDidLoad()
+    
     entityManager = EntityManager(scene: self)
     physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     addTileMap()
     addNextTileMap()
     addBall()
-    addGiant()
     addCamera()
     
     lastUpdateTime = 0
@@ -48,9 +50,8 @@ class GameScene: SKScene {
   }
   
   override func update(_ currentTime: TimeInterval) {
-    if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
-      cam.position = spriteComponent.position
-    }
+    updateCameraPosition()
+    
     if !cam.contains(currentLandBackground) {
       previousLandBackground = currentLandBackground
       currentLandBackground = nextLandBackground
@@ -65,10 +66,10 @@ class GameScene: SKScene {
     // Calculate time since last update
     let deltaTime = currentTime - lastUpdateTime
     
-    giantSpawnRate -= deltaTime
-    if giantSpawnRate < 0 {
+    giantSpawnTime -= deltaTime
+    if giantSpawnTime < 0 {
       addGiant()
-      giantSpawnRate = 5
+      giantSpawnTime = giantSpawnCooldown
     }
     
     // Update entities
@@ -92,11 +93,15 @@ fileprivate extension GameScene {
   
   func addCamera() {
     cam = SKCameraNode()
+    updateCameraPosition()
+    self.camera = cam
+    addChild(cam)
+  }
+  
+  func updateCameraPosition() {
     if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
       cam.position = spriteComponent.position
     }
-    self.camera = cam
-    addChild(cam)
   }
   
   func addTileMap() {
@@ -110,7 +115,7 @@ fileprivate extension GameScene {
   
   func addBall() {
     let ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
-    ball.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground)
+    ball.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground, scene: self)
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
     entityManager.add(entity: Tiny(node: ball, team: .Team1, entityManager: entityManager))
@@ -118,7 +123,7 @@ fileprivate extension GameScene {
   
   func addGiant() {
     let giant = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 60, height: 60))
-    giant.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground)
+    giant.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground, scene: self)
     giant.physicsBody = SKPhysicsBody(circleOfRadius: giant.size.height * 0.5)
     giant.physicsBody?.isDynamic = true
     entityManager.add(entity: Giant(node: giant, team: .Team2, entityManager: entityManager))
