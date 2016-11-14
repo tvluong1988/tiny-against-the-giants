@@ -18,16 +18,15 @@ class GameScene: SKScene {
   var currentLandBackground: SKTileMapNode!
   var cam: SKCameraNode!
   
-  private var lastUpdateTime : TimeInterval = 0
+  private var lastUpdateTime: TimeInterval = 0
+  private var giantSpawnRate: TimeInterval = 3
   
   override func sceneDidLoad() {
     entityManager = EntityManager(scene: self)
-    physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
+    physicsWorld.gravity = CGVector(dx: 0, dy: -0.1)
     addTileMap()
     addNextTileMap()
     addBall()
-    addGiant()
-    addGiant()
     addGiant()
     addCamera()
     
@@ -65,6 +64,12 @@ class GameScene: SKScene {
     
     // Calculate time since last update
     let deltaTime = currentTime - lastUpdateTime
+    
+    giantSpawnRate -= deltaTime
+    if giantSpawnRate < 0 {
+      addGiant()
+      giantSpawnRate = 5
+    }
     
     // Update entities
     entityManager.update(deltaTime: deltaTime)
