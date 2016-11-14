@@ -22,10 +22,12 @@ class GameScene: SKScene {
   
   override func sceneDidLoad() {
     entityManager = EntityManager(scene: self)
-    physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+    physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
     addTileMap()
     addNextTileMap()
     addBall()
+    addGiant()
+    addGiant()
     addGiant()
     addCamera()
     
@@ -37,13 +39,11 @@ class GameScene: SKScene {
       let touchLocation = touch.location(in: self.view)
       let previousTouchLocation = touch.previousLocation(in: self.view)
       
-      if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
-        let xDirection = touchLocation.x - previousTouchLocation.x
-        if xDirection < 0 {
-          spriteComponent.physicsBody?.applyForce(CGVector(dx: -50, dy: -30))
-        } else {
-          spriteComponent.physicsBody?.applyForce(CGVector(dx: 50, dy: -30))
-        }
+      if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteNode = ball.component(ofType: SpriteComponent.self)?.node {
+        let change = touchLocation - previousTouchLocation
+        let changeNormalized = change.normalized()
+        let vector = CGVector(dx: 30 * changeNormalized.x, dy: -30 * changeNormalized.y)
+        spriteNode.physicsBody?.applyForce(vector)
       }
     }
   }
@@ -112,7 +112,7 @@ fileprivate extension GameScene {
   }
   
   func addGiant() {
-    let giant = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 100, height: 100))
+    let giant = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 60, height: 60))
     giant.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground)
     giant.physicsBody = SKPhysicsBody(circleOfRadius: giant.size.height * 0.5)
     giant.physicsBody?.isDynamic = true
