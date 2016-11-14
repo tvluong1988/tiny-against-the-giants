@@ -18,13 +18,18 @@ class GameScene: SKScene {
   var currentLandBackground: SKTileMapNode!
   var cam: SKCameraNode!
   
+  private var lastUpdateTime : TimeInterval = 0
+  
   override func sceneDidLoad() {
     entityManager = EntityManager(scene: self)
-    physicsWorld.gravity = CGVector(dx: 0, dy: -1.0)
+    physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     addTileMap()
     addNextTileMap()
     addBall()
+    addGiant()
     addCamera()
+    
+    lastUpdateTime = 0
   }
   
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -32,7 +37,7 @@ class GameScene: SKScene {
       let touchLocation = touch.location(in: self.view)
       let previousTouchLocation = touch.previousLocation(in: self.view)
       
-      if let ball = getBall(), let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
+      if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
         let xDirection = touchLocation.x - previousTouchLocation.x
         if xDirection < 0 {
           spriteComponent.physicsBody?.applyForce(CGVector(dx: -50, dy: -30))
@@ -44,7 +49,7 @@ class GameScene: SKScene {
   }
   
   override func update(_ currentTime: TimeInterval) {
-    if let ball = getBall(), let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
+    if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
       cam.position = spriteComponent.position
     }
     if !cam.contains(currentLandBackground) {
@@ -52,6 +57,20 @@ class GameScene: SKScene {
       currentLandBackground = nextLandBackground
       addNextTileMap()
     }
+    
+    // Initialize _lastUpdateTime if it has not already been
+    if lastUpdateTime == 0 {
+      lastUpdateTime = currentTime
+    }
+    
+    // Calculate time since last update
+    let deltaTime = currentTime - lastUpdateTime
+    
+    // Update entities
+    entityManager.update(deltaTime: deltaTime)
+    
+    lastUpdateTime = currentTime
+
   }
 }
 
@@ -68,7 +87,7 @@ fileprivate extension GameScene {
   
   func addCamera() {
     cam = SKCameraNode()
-    if let ball = getBall(), let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
+    if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteComponent = ball.component(ofType: SpriteComponent.self)?.node {
       cam.position = spriteComponent.position
     }
     self.camera = cam
@@ -86,19 +105,17 @@ fileprivate extension GameScene {
   
   func addBall() {
     let ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
-    
-    let column = GKRandomSource.sharedRandom().nextInt(upperBound: currentLandBackground.numberOfColumns)
-    let row = GKRandomSource.sharedRandom().nextInt(upperBound: currentLandBackground.numberOfRows)
-    ball.position = currentLandBackground.centerOfTile(atColumn: column, row: row)
+    ball.position = getRandomPositionInTileMap(tileMap: currentLandBackground)
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
-    
-    let ballEntity = Tiny(node: ball, team: .Team1)
-    entityManager.add(entity: ballEntity)
+    entityManager.add(entity: Tiny(node: ball, team: .Team1, entityManager: entityManager))
   }
   
-  func getBall() -> GKEntity? {
-    let balls = entityManager.entitiesForPlayer()
-    return balls.first
+  func addGiant() {
+    let giant = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 100, height: 100))
+    giant.position = getRandomPositionInTileMap(tileMap: currentLandBackground)
+    giant.physicsBody = SKPhysicsBody(circleOfRadius: giant.size.height * 0.5)
+    giant.physicsBody?.isDynamic = true
+    entityManager.add(entity: Giant(node: giant, team: .Team2, entityManager: entityManager))
   }
 }

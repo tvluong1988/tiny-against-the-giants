@@ -6,7 +6,8 @@
 //  Copyright © 2016 Thinh Luong. All rights reserved.
 //
 
-import SpriteKit
+import GameplayKit
+
 
 func getLandBackground() -> SKTileMapNode? {
   var tileMap: SKTileMapNode?
@@ -46,4 +47,10 @@ func getTileMapFilled() -> SKTileMapNode? {
   }
   
   return tileMap
+}
+
+func getRandomPositionInTileMap(tileMap: SKTileMapNode) -> CGPoint {
+  let column = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfColumns)
+  let row = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfRows)
+  return tileMap.centerOfTile(atColumn: column, row: row)
 }

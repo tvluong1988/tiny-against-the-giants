@@ -1,5 +1,5 @@
 //
-//  Tiny.swift
+//  Giant.swift
 //  Tiny Against the Giants
 //
 //  Created by Thinh Luong on 11/13/16.
@@ -8,7 +8,7 @@
 
 import GameplayKit
 
-class Tiny: GKEntity {
+class Giant: GKEntity {
   // MARK: Lifecycle
   init(node: SKSpriteNode, team: Team, entityManager: EntityManager) {
     super.init()
