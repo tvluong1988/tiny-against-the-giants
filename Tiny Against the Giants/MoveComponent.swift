@@ -17,7 +17,8 @@ class MoveComponent: GKAgent2D {
       return
     }
     
-    guard let enemyMoveComponent = closestMoveComponentForTeam(team: teamComponent.team.oppositeTeam()) else {
+    let enemyTeam = teamComponent.team.oppositeTeam()
+    guard let enemyMoveComponent = closestMoveComponentForTeam(team: enemyTeam), enemyTeam == .Team1 else {
       return
     }
     

@@ -15,7 +15,7 @@ class Giant: GKEntity {
     
     addComponent(SpriteComponent(node: node))
     addComponent(TeamComponent(team: team))
-    addComponent(MoveComponent(maxSpeed: 150, maxAcceleration: 5, radius: Float(node.size.width * 0.3), entityManager: entityManager))
+    addComponent(MoveComponent(maxSpeed: 150, maxAcceleration: 50, radius: Float(node.size.width * 0.3), entityManager: entityManager))
   }
   
   required init?(coder aDecoder: NSCoder) {

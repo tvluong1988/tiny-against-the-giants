@@ -105,7 +105,7 @@ fileprivate extension GameScene {
   
   func addBall() {
     let ball = SKSpriteNode(color: UIColor.red, size: CGSize(width: 30, height: 30))
-    ball.position = getRandomPositionInTileMap(tileMap: currentLandBackground)
+    ball.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground)
     ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
     ball.physicsBody?.isDynamic = true
     entityManager.add(entity: Tiny(node: ball, team: .Team1, entityManager: entityManager))
@@ -113,7 +113,7 @@ fileprivate extension GameScene {
   
   func addGiant() {
     let giant = SKSpriteNode(color: UIColor.blue, size: CGSize(width: 100, height: 100))
-    giant.position = getRandomPositionInTileMap(tileMap: currentLandBackground)
+    giant.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground)
     giant.physicsBody = SKPhysicsBody(circleOfRadius: giant.size.height * 0.5)
     giant.physicsBody?.isDynamic = true
     entityManager.add(entity: Giant(node: giant, team: .Team2, entityManager: entityManager))

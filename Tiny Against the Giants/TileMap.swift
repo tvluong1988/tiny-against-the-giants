@@ -54,3 +54,15 @@ func getRandomPositionInTileMap(tileMap: SKTileMapNode) -> CGPoint {
   let row = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfRows)
   return tileMap.centerOfTile(atColumn: column, row: row)
 }
+
+
+func getRandomPositionNotOnTileGroupInTileMap(tileMap: SKTileMapNode) -> CGPoint {
+  var column: Int
+  var row: Int
+  repeat {
+    column = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfColumns)
+    row = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfRows)
+  } while tileMap.tileGroup(atColumn: column, row: row) != nil
+
+  return tileMap.centerOfTile(atColumn: column, row: row)
+}
