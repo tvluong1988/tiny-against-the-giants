@@ -23,7 +23,7 @@ class GameScene: SKScene {
   
   override func sceneDidLoad() {
     entityManager = EntityManager(scene: self)
-    physicsWorld.gravity = CGVector(dx: 0, dy: -0.1)
+    physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     addTileMap()
     addNextTileMap()
     addBall()
