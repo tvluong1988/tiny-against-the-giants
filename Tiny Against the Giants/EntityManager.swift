@@ -36,7 +36,8 @@ class EntityManager {
   
   lazy var componentSystems: [GKComponentSystem] = {
     let moveSystems = GKComponentSystem(componentClass: MoveComponent.self)
-    return [moveSystems]
+    let particleSystems = GKComponentSystem(componentClass: ParticleComponent.self)
+    return [moveSystems, particleSystems]
   }()
 }
 
