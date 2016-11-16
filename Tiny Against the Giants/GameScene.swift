@@ -29,7 +29,7 @@ class GameScene: SKScene {
     
     entityManager = EntityManager(scene: self)
     physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-    addTileMap()
+    addTileMaps()
     addNextTileMap()
     addBall()
     addCamera()
@@ -53,6 +53,7 @@ class GameScene: SKScene {
   
   override func update(_ currentTime: TimeInterval) {
     if !cam.contains(currentLandBackground) {
+      previousLandBackground.removeFromParent()
       previousLandBackground = currentLandBackground
       currentLandBackground = nextLandBackground
       addNextTileMap()
@@ -102,13 +103,22 @@ fileprivate extension GameScene {
     addChild(cam)
   }
   
-  func addTileMap() {
-    currentLandBackground = getLandBackground()
-    currentLandBackground.anchorPoint = CGPoint(x: 0, y: 1)
-    currentLandBackground.position = CGPoint.zero
-    currentLandBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: currentLandBackground))
-    currentLandBackground.physicsBody?.isDynamic = false
+  func addTileMaps() {
+    previousLandBackground = getTileMap()
+    addChild(previousLandBackground)
+    currentLandBackground = getTileMap()
     addChild(currentLandBackground)
+  }
+  
+  func getTileMap() -> SKTileMapNode? {
+    var tileMap: SKTileMapNode!
+    tileMap = getLandBackground()
+    tileMap.anchorPoint = CGPoint(x: 0, y: 1)
+    tileMap.position = CGPoint.zero
+    tileMap.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: tileMap))
+    tileMap.physicsBody?.isDynamic = false
+  
+    return tileMap
   }
   
   func addBall() {
