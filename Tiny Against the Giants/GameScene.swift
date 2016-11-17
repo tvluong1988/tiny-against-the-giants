@@ -17,10 +17,13 @@ class GameScene: SKScene {
   var nextLandBackground: SKTileMapNode!
   var currentLandBackground: SKTileMapNode!
   var cam: SKCameraNode!
+  let timerNode = SKLabelNode(text: "Still Alive?")
   
   private var lastUpdateTime: TimeInterval = 0
   private let giantSpawnCooldown: TimeInterval = 3
   private var giantSpawnTime: TimeInterval = 0
+  private var oneSecondTimer: TimeInterval = 1
+  private var aliveTime: Int = 0
   private let maxGiantCount = 5
   var currentGiantCount = 0
   
@@ -35,6 +38,14 @@ class GameScene: SKScene {
     addCamera()
     
     lastUpdateTime = 0
+  }
+  
+  override func didMove(to view: SKView) {
+    timerNode.horizontalAlignmentMode = .center
+    timerNode.verticalAlignmentMode = .top
+    timerNode.position.y = size.height / 2
+    timerNode.fontSize = 50
+    cam.addChild(timerNode)
   }
   
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,6 +84,13 @@ class GameScene: SKScene {
       giantSpawnTime = giantSpawnCooldown
     }
     
+    oneSecondTimer -= deltaTime
+    if oneSecondTimer < 0 {
+      aliveTime += 1
+      timerNode.text = "Still Alive: \(aliveTime) seconds"
+      oneSecondTimer = 1
+    }
+    
     // Update entities
     entityManager.update(deltaTime: deltaTime)
     
@@ -99,6 +117,7 @@ fileprivate extension GameScene {
       let constraint = SKConstraint.distance(SKRange(constantValue: 0), to: spriteNode)
       cam.constraints = [constraint]
     }
+    
     self.camera = cam
     addChild(cam)
   }
