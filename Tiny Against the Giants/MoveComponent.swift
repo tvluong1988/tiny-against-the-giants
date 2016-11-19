@@ -68,18 +68,18 @@ extension MoveComponent {
 
 extension MoveComponent: GKAgentDelegate {
   func agentWillUpdate(_ agent: GKAgent) {
-    guard let spriteComponent = entity?.component(ofType: SpriteComponent.self) else {
+    guard let node = entity?.component(ofType: RenderComponent.self)?.node else {
       return
     }
     
-    self.position = float2(spriteComponent.node.position)
+    self.position = float2(node.position)
   }
   
   func agentDidUpdate(_ agent: GKAgent) {
-    guard let spriteComponent = entity?.component(ofType: SpriteComponent.self) else {
+    guard let node = entity?.component(ofType: RenderComponent.self)?.node else {
       return
     }
     
-    spriteComponent.node.position = CGPoint(position)
+    node.position = CGPoint(position)
   }
 }

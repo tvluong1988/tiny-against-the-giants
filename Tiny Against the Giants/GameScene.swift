@@ -53,11 +53,11 @@ class GameScene: SKScene {
       let touchLocation = touch.location(in: self.view)
       let previousTouchLocation = touch.previousLocation(in: self.view)
       
-      if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteNode = ball.component(ofType: SpriteComponent.self)?.node {
+      if let ball = entityManager.entitiesForTeam(team: .Team1).first, let node = ball.component(ofType: RenderComponent.self)?.node {
         let change = touchLocation - previousTouchLocation
         let changeNormalized = change.normalized()
         let vector = CGVector(dx: 30 * changeNormalized.x, dy: -30 * changeNormalized.y)
-        spriteNode.physicsBody?.applyForce(vector)
+        node.physicsBody?.applyForce(vector)
       }
     }
   }
@@ -142,18 +142,20 @@ fileprivate extension GameScene {
   
   func addBall() {
     let ball = SKSpriteNode(color: UIColor.clear, size: CGSize(width: 30, height: 30))
-    ball.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground, scene: self)
-    ball.physicsBody = SKPhysicsBody(circleOfRadius: ball.size.height * 0.5)
-    ball.physicsBody?.isDynamic = true
-    entityManager.add(entity: Tiny(node: ball, team: .Team1, entityManager: entityManager))
+    let tiny = Tiny(node: ball, team: .Team1, entityManager: entityManager)
+    if let node  = tiny.component(ofType: RenderComponent.self)?.node {
+      node.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground, scene: self)
+    }
+    entityManager.add(entity: tiny)
   }
   
   func addGiant() {
-    let giant = SKSpriteNode(color: UIColor.clear, size: CGSize(width: 60, height: 60))
-    giant.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground, scene: self)
-    giant.physicsBody = SKPhysicsBody(circleOfRadius: giant.size.height * 0.5)
-    giant.physicsBody?.isDynamic = true
-    entityManager.add(entity: Giant(node: giant, team: .Team2, entityManager: entityManager))
+    let giantNode = SKSpriteNode(color: UIColor.clear, size: CGSize(width: 60, height: 60))
+    let giant = Giant(node: giantNode, team: .Team2, entityManager: entityManager)
+    if let node  = giant.component(ofType: RenderComponent.self)?.node {
+      node.position = getRandomPositionNotOnTileGroupInTileMap(tileMap: currentLandBackground, scene: self)
+    }
+    entityManager.add(entity: giant)
     
     currentGiantCount += 1
   }

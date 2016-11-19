@@ -12,8 +12,21 @@ class Tiny: GKEntity {
   // MARK: Lifecycle
   init(node: SKSpriteNode, team: Team, entityManager: EntityManager) {
     super.init()
+    let renderComponent = RenderComponent()
+    addComponent(renderComponent)
     
-    addComponent(SpriteComponent(node: node))
+    let spriteComponent = SpriteComponent(node: node)
+    renderComponent.node.addChild(spriteComponent.node)
+    addComponent(spriteComponent)
+    
+    let physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+    physicsBody.allowsRotation = false
+    let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
+    renderComponent.node.physicsBody = physicsComponent.physicsBody
+    addComponent(physicsComponent)
+    
+    addComponent(ChargeBarComponent(charge: 100, maxCharge: 100, displayChargeBar: true))
+    
     addComponent(TeamComponent(team: team))
     addComponent(MoveComponent(maxSpeed: 150, maxAcceleration: 5, radius: Float(node.size.width * 0.3), entityManager: entityManager))
     addComponent(ParticleComponent(particleEffect: SKEmitterNode(fileNamed: "Magic")!))

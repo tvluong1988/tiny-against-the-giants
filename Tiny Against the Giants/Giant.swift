@@ -13,7 +13,18 @@ class Giant: GKEntity {
   init(node: SKSpriteNode, team: Team, entityManager: EntityManager) {
     super.init()
     
-    addComponent(SpriteComponent(node: node))
+    let renderComponent = RenderComponent()
+    addComponent(renderComponent)
+    
+    let spriteComponent = SpriteComponent(node: node)
+    renderComponent.node.addChild(spriteComponent.node)
+    addComponent(spriteComponent)
+    
+    let physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
+    let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
+    renderComponent.node.physicsBody = physicsComponent.physicsBody
+    addComponent(physicsComponent)
+    
     addComponent(TeamComponent(team: team))
     addComponent(MoveComponent(maxSpeed: 200, maxAcceleration: 100, radius: Float(node.size.width * 0.3), entityManager: entityManager))
     addComponent(ParticleComponent(particleEffect: SKEmitterNode(fileNamed: "Fire")!))

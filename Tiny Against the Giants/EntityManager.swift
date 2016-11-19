@@ -45,8 +45,22 @@ extension EntityManager {
   func add(entity: GKEntity) {
     entities.insert(entity)
     
-    if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
-      scene.addChild(spriteNode)
+    if let renderNode = entity.component(ofType: RenderComponent.self)?.node {
+      let constraint = SKConstraint.zRotation(SKRange.init(constantValue: 0))
+      constraint.referenceNode = scene
+      renderNode.constraints = [constraint]
+      
+      if let chargeBarNode = entity.component(ofType: ChargeBarComponent.self)?.chargeBarNode {
+        let xRange = SKRange(constantValue: 0)
+        let yRange = SKRange(constantValue: 50)
+        
+        let constraint = SKConstraint.positionX(xRange, y: yRange)
+        constraint.referenceNode = renderNode
+        
+        chargeBarNode.constraints = [constraint]
+        scene.addChild(chargeBarNode)
+      }
+      scene.addChild(renderNode)
     }
     
     for componentSystem in componentSystems {
@@ -55,8 +69,8 @@ extension EntityManager {
   }
   
   func remove(entity: GKEntity) {
-    if let spriteNode = entity.component(ofType: SpriteComponent.self)?.node {
-      spriteNode.removeFromParent()
+    if let node = entity.component(ofType: RenderComponent.self)?.node {
+      node.removeFromParent()
     }
     
     entities.remove(entity)
