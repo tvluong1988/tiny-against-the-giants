@@ -40,6 +40,7 @@ class GameScene: SKScene {
     addCamera()
     
     lastUpdateTime = 0
+    ColliderType.definedCollisions = [.Obstacle: []]
   }
   
   override func didMove(to view: SKView) {
@@ -168,7 +169,6 @@ fileprivate extension GameScene {
     tileMap.anchorPoint = CGPoint(x: 0, y: 1)
     tileMap.position = CGPoint.zero
     tileMap.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: tileMap))
-    ColliderType.definedCollisions = [.Obstacle: []]
     tileMap.physicsBody?.categoryBitMask = ColliderType.Obstacle.categoryMask
     tileMap.physicsBody?.collisionBitMask = ColliderType.Obstacle.collisionMask
     tileMap.physicsBody?.isDynamic = false

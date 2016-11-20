@@ -30,7 +30,6 @@
 		8BE0B9441DDBACDD00CD65BC /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0B9431DDBACDD00CD65BC /* HudNode.swift */; };
 		8BFA3E151DE00BFF00E4DFF7 /* ColliderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */; };
 		8BFF551F1DC6DF8300BB51C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */; };
-		8BFF55211DC6DF8300BB51C5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF55201DC6DF8300BB51C5 /* GameScene.sks */; };
 		8BFF55251DC6DF8300BB51C5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF55241DC6DF8300BB51C5 /* GameScene.swift */; };
 		8BFF55271DC6DF8300BB51C5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF55261DC6DF8300BB51C5 /* GameViewController.swift */; };
 		8BFF552A1DC6DF8300BB51C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF55281DC6DF8300BB51C5 /* Main.storyboard */; };
@@ -82,7 +81,6 @@
 		8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColliderType.swift; sourceTree = "<group>"; };
 		8BFF551B1DC6DF8300BB51C5 /* Tiny Against the Giants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tiny Against the Giants.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8BFF55201DC6DF8300BB51C5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8BFF55241DC6DF8300BB51C5 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		8BFF55261DC6DF8300BB51C5 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		8BFF55291DC6DF8300BB51C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 				8B2AA01D1DDA38830093EBD9 /* Entities */,
 				8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */,
 				8B9CCA791DD8E2BA00A9242C /* EntityManager.swift */,
-				8BFF55201DC6DF8300BB51C5 /* GameScene.sks */,
 				8BFF55241DC6DF8300BB51C5 /* GameScene.swift */,
 				8BFF55261DC6DF8300BB51C5 /* GameViewController.swift */,
 				8BFF55281DC6DF8300BB51C5 /* Main.storyboard */,
@@ -379,7 +376,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFF552A1DC6DF8300BB51C5 /* Main.storyboard in Resources */,
-				8BFF55211DC6DF8300BB51C5 /* GameScene.sks in Resources */,
 				8BFF552C1DC6DF8300BB51C5 /* Assets.xcassets in Resources */,
 				8BE0B9421DDBA9C900CD65BC /* Magic.sks in Resources */,
 				8BE0B9401DDBA78600CD65BC /* Fire.sks in Resources */,
