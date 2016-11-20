@@ -30,6 +30,8 @@ class GameScene: SKScene {
   override func sceneDidLoad() {
     super.sceneDidLoad()
     
+    physicsWorld.contactDelegate = self
+    
     entityManager = EntityManager(scene: self)
     physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     addTileMaps()
@@ -95,6 +97,40 @@ class GameScene: SKScene {
     entityManager.update(deltaTime: deltaTime)
     
     lastUpdateTime = currentTime
+
+  }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+  func didBegin(_ contact: SKPhysicsContact) {
+    handleContact(contact: contact) {contactNotifiable, otherEntity in
+      contactNotifiable.contactWithEntityDidBegin(otherEntity)
+    }
+  }
+  
+  func didEnd(_ contact: SKPhysicsContact) {
+    handleContact(contact: contact) {contactNotifiable, otherEntity in
+      contactNotifiable.contactWithEntityDidEnd(otherEntity)
+    }
+  }
+  
+  private func handleContact(contact: SKPhysicsContact, contactCallBack: (ContactNotifiable, GKEntity) -> Void) {
+    let colliderTypeA = ColliderType(rawValue: contact.bodyA.categoryBitMask)
+    let colliderTypeB = ColliderType(rawValue: contact.bodyB.categoryBitMask)
+    
+    let aWantsCallBack = colliderTypeA.notifyOnContactWith(colliderTypeB)
+    let bWantsCallBack = colliderTypeB.notifyOnContactWith(colliderTypeA)
+    
+    let entityA = contact.bodyA.node?.entity
+    let entityB = contact.bodyB.node?.entity
+    
+    if let notifiableEntity = entityA as? ContactNotifiable, let otherEntity = entityB, aWantsCallBack {
+      contactCallBack(notifiableEntity, otherEntity)
+    }
+    
+    if let notifiableEntity = entityB as? ContactNotifiable, let otherEntity = entityA, bWantsCallBack {
+      contactCallBack(notifiableEntity, otherEntity)
+    }
 
   }
 }

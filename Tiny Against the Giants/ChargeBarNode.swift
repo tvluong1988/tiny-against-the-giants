@@ -32,13 +32,13 @@ class ChargeBarNode: SKSpriteNode {
   
   // MARK: Static Properties
   struct Configuration {
-    static let size = CGSize(width: 74.0, height: 10.0)
+    static let size = CGSize(width: 70.0, height: 6.0)
     
     static let chargeLevelNodeSize = CGSize(width: 70.0, height: 6.0)
     
     static let levelUpdateDuration: TimeInterval = 0.1
     
-    static let backgroundColor = SKColor.black
+    static let backgroundColor = SKColor.red
     
     static let chargeLevelColor = SKColor.green
   }

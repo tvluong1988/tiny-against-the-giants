@@ -44,6 +44,14 @@ extension ColliderType {
     
     return mask?.rawValue ?? 0
   }
+  
+  func notifyOnContactWith(_ colliderType: ColliderType) -> Bool {
+    if let requestedContacts = ColliderType.requestedContactNotifications[self] {
+      return requestedContacts.contains(colliderType)
+    }
+    
+    return false
+  }
 }
 
 extension ColliderType: CustomDebugStringConvertible {

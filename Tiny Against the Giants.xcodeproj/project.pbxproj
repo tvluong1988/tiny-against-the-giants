@@ -14,6 +14,7 @@
 		8B7408D71DD53304004139E7 /* NoiseMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408D61DD53304004139E7 /* NoiseMap.swift */; };
 		8B7408D91DD5334A004139E7 /* TileMapPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */; };
 		8B7408DB1DD5343E004139E7 /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408DA1DD5343E004139E7 /* TileMap.swift */; };
+		8B7F27D41DE1325B0065DC0F /* ContactNotifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */; };
 		8B838F461DC6F6A5007B70F0 /* BasicTile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8B838F451DC6F6A5007B70F0 /* BasicTile.sks */; };
 		8B9CCA761DD8DFDE00A9242C /* Tiny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA751DD8DFDE00A9242C /* Tiny.swift */; };
 		8B9CCA781DD8E16700A9242C /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA771DD8E16700A9242C /* SpriteComponent.swift */; };
@@ -64,6 +65,7 @@
 		8B7408D61DD53304004139E7 /* NoiseMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoiseMap.swift; sourceTree = "<group>"; };
 		8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMapPhysics.swift; sourceTree = "<group>"; };
 		8B7408DA1DD5343E004139E7 /* TileMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
+		8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactNotifiable.swift; sourceTree = "<group>"; };
 		8B838F451DC6F6A5007B70F0 /* BasicTile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BasicTile.sks; sourceTree = "<group>"; };
 		8B9CCA751DD8DFDE00A9242C /* Tiny.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tiny.swift; sourceTree = "<group>"; };
 		8B9CCA771DD8E16700A9242C /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				8BE0B9431DDBACDD00CD65BC /* HudNode.swift */,
 				8B0099921DDE6F8100B52431 /* ChargeBarNode.swift */,
 				8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */,
+				8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */,
 			);
 			path = "Tiny Against the Giants";
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				8B7408DB1DD5343E004139E7 /* TileMap.swift in Sources */,
 				8BFF551F1DC6DF8300BB51C5 /* AppDelegate.swift in Sources */,
 				8BE0B9441DDBACDD00CD65BC /* HudNode.swift in Sources */,
+				8B7F27D41DE1325B0065DC0F /* ContactNotifiable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
