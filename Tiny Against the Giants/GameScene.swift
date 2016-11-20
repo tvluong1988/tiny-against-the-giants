@@ -12,18 +12,20 @@ import GameplayKit
 class GameScene: SKScene {
   
   var entityManager: EntityManager!
+  lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
+    GameSceneActiveState(gameScene: self),
+    GameSceneFailState(gameScene: self)
+  ])
   
   var previousLandBackground: SKTileMapNode!
   var nextLandBackground: SKTileMapNode!
   var currentLandBackground: SKTileMapNode!
   var cam: SKCameraNode!
-  let timerNode = SKLabelNode(text: "Still Alive?")
+  let timerNode = SKLabelNode()
   
   private var lastUpdateTime: TimeInterval = 0
   private let giantSpawnCooldown: TimeInterval = 3
   private var giantSpawnTime: TimeInterval = 0
-  private var oneSecondTimer: TimeInterval = 1
-  private var aliveTime: Int = 0
   private let maxGiantCount = 5
   var currentGiantCount = 0
   
@@ -49,6 +51,8 @@ class GameScene: SKScene {
     timerNode.position.y = size.height / 2
     timerNode.fontSize = 50
     cam.addChild(timerNode)
+    
+    stateMachine.enter(GameSceneActiveState.self)
   }
   
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -87,15 +91,10 @@ class GameScene: SKScene {
       giantSpawnTime = giantSpawnCooldown
     }
     
-    oneSecondTimer -= deltaTime
-    if oneSecondTimer < 0 {
-      aliveTime += 1
-      timerNode.text = "Still Alive: \(aliveTime) seconds"
-      oneSecondTimer = 1
-    }
-    
     // Update entities
     entityManager.update(deltaTime: deltaTime)
+    
+    stateMachine.update(deltaTime: deltaTime)
     
     lastUpdateTime = currentTime
 
