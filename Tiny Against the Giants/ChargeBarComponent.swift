@@ -34,7 +34,6 @@ class ChargeBarComponent: GKComponent {
     }
   }
   
-  
   // MARK: Lifecycle
   init(charge: Double, maxCharge: Double, displayChargeBar: Bool = false) {
     self.charge = charge

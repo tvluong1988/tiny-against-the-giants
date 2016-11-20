@@ -18,7 +18,6 @@ class ParticleComponent: GKComponent {
       entityHasParticleEffect = true
     }
     
-    
   }
   // MARK: Lifecycle
   init(particleEffect: SKEmitterNode) {

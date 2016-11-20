@@ -101,10 +101,7 @@ class GameScene: SKScene {
 
 fileprivate extension GameScene {
   func addNextTileMap() {
-    nextLandBackground = getLandBackground()
-    nextLandBackground.anchorPoint = CGPoint(x: 0, y: 1)
-    nextLandBackground.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: nextLandBackground))
-    nextLandBackground.physicsBody?.isDynamic = false
+    nextLandBackground = getTileMap()
     addChild(nextLandBackground)
     
     nextLandBackground.position.y = currentLandBackground.frame.minY
@@ -135,6 +132,9 @@ fileprivate extension GameScene {
     tileMap.anchorPoint = CGPoint(x: 0, y: 1)
     tileMap.position = CGPoint.zero
     tileMap.physicsBody = SKPhysicsBody(bodies: getPhysicsBodiesFromTileMapNode(tileMapNode: tileMap))
+    ColliderType.definedCollisions = [.Obstacle: []]
+    tileMap.physicsBody?.categoryBitMask = ColliderType.Obstacle.categoryMask
+    tileMap.physicsBody?.collisionBitMask = ColliderType.Obstacle.collisionMask
     tileMap.physicsBody?.isDynamic = false
   
     return tileMap

@@ -21,7 +21,8 @@ class Giant: GKEntity {
     addComponent(spriteComponent)
     
     let physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
-    let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
+    ColliderType.definedCollisions = [.Enemy: [.Enemy, .Player]]
+    let physicsComponent = PhysicsComponent(physicsBody: physicsBody, colliderType: .Enemy)
     renderComponent.node.physicsBody = physicsComponent.physicsBody
     addComponent(physicsComponent)
     

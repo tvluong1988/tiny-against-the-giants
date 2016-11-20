@@ -27,6 +27,7 @@
 		8BE0B9401DDBA78600CD65BC /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BE0B93F1DDBA78600CD65BC /* Fire.sks */; };
 		8BE0B9421DDBA9C900CD65BC /* Magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BE0B9411DDBA9C900CD65BC /* Magic.sks */; };
 		8BE0B9441DDBACDD00CD65BC /* HudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0B9431DDBACDD00CD65BC /* HudNode.swift */; };
+		8BFA3E151DE00BFF00E4DFF7 /* ColliderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */; };
 		8BFF551F1DC6DF8300BB51C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */; };
 		8BFF55211DC6DF8300BB51C5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF55201DC6DF8300BB51C5 /* GameScene.sks */; };
 		8BFF55251DC6DF8300BB51C5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF55241DC6DF8300BB51C5 /* GameScene.swift */; };
@@ -76,6 +77,7 @@
 		8BE0B93F1DDBA78600CD65BC /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
 		8BE0B9411DDBA9C900CD65BC /* Magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Magic.sks; sourceTree = "<group>"; };
 		8BE0B9431DDBACDD00CD65BC /* HudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudNode.swift; sourceTree = "<group>"; };
+		8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColliderType.swift; sourceTree = "<group>"; };
 		8BFF551B1DC6DF8300BB51C5 /* Tiny Against the Giants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tiny Against the Giants.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BFF55201DC6DF8300BB51C5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				8BE0B9411DDBA9C900CD65BC /* Magic.sks */,
 				8BE0B9431DDBACDD00CD65BC /* HudNode.swift */,
 				8B0099921DDE6F8100B52431 /* ChargeBarNode.swift */,
+				8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */,
 			);
 			path = "Tiny Against the Giants";
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				8B9CCA861DD9149400A9242C /* Util.swift in Sources */,
 				8B7408D71DD53304004139E7 /* NoiseMap.swift in Sources */,
 				8B9CCA821DD911C900A9242C /* MoveBehavior.swift in Sources */,
+				8BFA3E151DE00BFF00E4DFF7 /* ColliderType.swift in Sources */,
 				8B2CACE41DDFD3F800889B11 /* PhysicsComponent.swift in Sources */,
 				8B9CCA7A1DD8E2BA00A9242C /* EntityManager.swift in Sources */,
 				8B9CCA781DD8E16700A9242C /* SpriteComponent.swift in Sources */,

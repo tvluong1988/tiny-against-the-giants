@@ -21,7 +21,8 @@ class Tiny: GKEntity {
     
     let physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
     physicsBody.allowsRotation = false
-    let physicsComponent = PhysicsComponent(physicsBody: physicsBody)
+    ColliderType.definedCollisions = [.Player: [.Enemy, .Obstacle]]
+    let physicsComponent = PhysicsComponent(physicsBody: physicsBody, colliderType: .Player)
     renderComponent.node.physicsBody = physicsComponent.physicsBody
     addComponent(physicsComponent)
     
