@@ -179,6 +179,33 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		8BD5EA801DE1707100A46BD0 /* PhysicsContactAndCollision */ = {
+			isa = PBXGroup;
+			children = (
+				8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */,
+				8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */,
+			);
+			name = PhysicsContactAndCollision;
+			sourceTree = "<group>";
+		};
+		8BD5EA811DE1707F00A46BD0 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				8BE0B9431DDBACDD00CD65BC /* HudNode.swift */,
+				8B0099921DDE6F8100B52431 /* ChargeBarNode.swift */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
+		8BD5EA821DE170CC00A46BD0 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				8BE0B93F1DDBA78600CD65BC /* Fire.sks */,
+				8BE0B9411DDBA9C900CD65BC /* Magic.sks */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
 		8BFF55121DC6DF8300BB51C5 = {
 			isa = PBXGroup;
 			children = (
@@ -217,12 +244,9 @@
 				8BFF552B1DC6DF8300BB51C5 /* Assets.xcassets */,
 				8BFF552D1DC6DF8300BB51C5 /* LaunchScreen.storyboard */,
 				8BFF55301DC6DF8300BB51C5 /* Info.plist */,
-				8BE0B93F1DDBA78600CD65BC /* Fire.sks */,
-				8BE0B9411DDBA9C900CD65BC /* Magic.sks */,
-				8BE0B9431DDBACDD00CD65BC /* HudNode.swift */,
-				8B0099921DDE6F8100B52431 /* ChargeBarNode.swift */,
-				8BFA3E141DE00BFF00E4DFF7 /* ColliderType.swift */,
-				8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */,
+				8BD5EA821DE170CC00A46BD0 /* Particles */,
+				8BD5EA811DE1707F00A46BD0 /* Nodes */,
+				8BD5EA801DE1707100A46BD0 /* PhysicsContactAndCollision */,
 			);
 			path = "Tiny Against the Giants";
 			sourceTree = "<group>";
