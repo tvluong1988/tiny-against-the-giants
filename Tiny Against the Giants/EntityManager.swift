@@ -77,6 +77,25 @@ extension EntityManager {
     entitiesToRemove.insert(entity)
   }
   
+  func removeAll() {
+    for entity in entities {
+      if let chargeBarNode = entity.component(ofType: ChargeBarComponent.self)?.chargeBarNode {
+        chargeBarNode.removeFromParent()
+      }
+
+      if let node = entity.component(ofType: RenderComponent.self)?.node {
+        node.removeFromParent()
+      }
+    }
+
+    entities.removeAll()
+    entitiesToRemove.removeAll()
+  }
+  
+  func getPlayerEntity() -> GKEntity? {
+    return entitiesForTeam(team: .Team1).first
+  }
+  
   func entitiesForTeam(team: Team) -> [GKEntity] {
     return entities.flatMap { entity in
       if let teamComponent = entity.component(ofType: TeamComponent.self) {

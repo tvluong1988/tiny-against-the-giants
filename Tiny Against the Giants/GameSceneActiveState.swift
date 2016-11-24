@@ -10,7 +10,6 @@ import GameplayKit
 
 class GameSceneActiveState: GKState {
   // MARK: States
-  
   override func update(deltaTime seconds: TimeInterval) {
     super.update(deltaTime: seconds)
     
@@ -23,6 +22,11 @@ class GameSceneActiveState: GKState {
       {
       stateMachine?.enter(GameSceneFailState.self)
     }
+  }
+  
+  override func didEnter(from previousState: GKState?) {
+    super.didEnter(from: previousState)
+    time = 0
   }
   
   // MARK: Lifecycle

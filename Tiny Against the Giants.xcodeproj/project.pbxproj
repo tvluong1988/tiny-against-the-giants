@@ -17,6 +17,8 @@
 		8B7408D91DD5334A004139E7 /* TileMapPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */; };
 		8B7408DB1DD5343E004139E7 /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408DA1DD5343E004139E7 /* TileMap.swift */; };
 		8B7F27D41DE1325B0065DC0F /* ContactNotifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */; };
+		8B804B5D1DE75E9500F0C534 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804B5C1DE75E9500F0C534 /* ButtonNode.swift */; };
+		8B804B5F1DE7648900F0C534 /* GameScene+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804B5E1DE7648900F0C534 /* GameScene+Button.swift */; };
 		8B838F461DC6F6A5007B70F0 /* BasicTile.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8B838F451DC6F6A5007B70F0 /* BasicTile.sks */; };
 		8B9CCA761DD8DFDE00A9242C /* Tiny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA751DD8DFDE00A9242C /* Tiny.swift */; };
 		8B9CCA781DD8E16700A9242C /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA771DD8E16700A9242C /* SpriteComponent.swift */; };
@@ -69,6 +71,8 @@
 		8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMapPhysics.swift; sourceTree = "<group>"; };
 		8B7408DA1DD5343E004139E7 /* TileMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
 		8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactNotifiable.swift; sourceTree = "<group>"; };
+		8B804B5C1DE75E9500F0C534 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
+		8B804B5E1DE7648900F0C534 /* GameScene+Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+Button.swift"; sourceTree = "<group>"; };
 		8B838F451DC6F6A5007B70F0 /* BasicTile.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BasicTile.sks; sourceTree = "<group>"; };
 		8B9CCA751DD8DFDE00A9242C /* Tiny.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tiny.swift; sourceTree = "<group>"; };
 		8B9CCA771DD8E16700A9242C /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpriteComponent.swift; sourceTree = "<group>"; };
@@ -181,6 +185,33 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		8B804B601DE788CF00F0C534 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8B804B611DE788E100F0C534 /* GameSceneStates */,
+				8B804B5E1DE7648900F0C534 /* GameScene+Button.swift */,
+				8BFF55241DC6DF8300BB51C5 /* GameScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		8B804B611DE788E100F0C534 /* GameSceneStates */ = {
+			isa = PBXGroup;
+			children = (
+				8B5141F21DE213C8002BAE70 /* GameSceneActiveState.swift */,
+				8B5141F41DE21638002BAE70 /* GameSceneFailState.swift */,
+			);
+			name = GameSceneStates;
+			sourceTree = "<group>";
+		};
+		8B804B621DE7892F00F0C534 /* EntityManager */ = {
+			isa = PBXGroup;
+			children = (
+				8B9CCA791DD8E2BA00A9242C /* EntityManager.swift */,
+			);
+			name = EntityManager;
+			sourceTree = "<group>";
+		};
 		8BD5EA801DE1707100A46BD0 /* PhysicsContactAndCollision */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +226,7 @@
 			children = (
 				8BE0B9431DDBACDD00CD65BC /* HudNode.swift */,
 				8B0099921DDE6F8100B52431 /* ChargeBarNode.swift */,
+				8B804B5C1DE75E9500F0C534 /* ButtonNode.swift */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -231,6 +263,8 @@
 		8BFF551D1DC6DF8300BB51C5 /* Tiny Against the Giants */ = {
 			isa = PBXGroup;
 			children = (
+				8B804B621DE7892F00F0C534 /* EntityManager */,
+				8B804B601DE788CF00F0C534 /* Scenes */,
 				8B2AA01F1DDA38A10093EBD9 /* Behaviors */,
 				8B2AA01E1DDA388C0093EBD9 /* Components */,
 				8B2AA0221DDA38ED0093EBD9 /* Utilities */,
@@ -238,8 +272,6 @@
 				8B2AA0201DDA38C60093EBD9 /* Noises */,
 				8B2AA01D1DDA38830093EBD9 /* Entities */,
 				8BFF551E1DC6DF8300BB51C5 /* AppDelegate.swift */,
-				8B9CCA791DD8E2BA00A9242C /* EntityManager.swift */,
-				8BFF55241DC6DF8300BB51C5 /* GameScene.swift */,
 				8BFF55261DC6DF8300BB51C5 /* GameViewController.swift */,
 				8BFF55281DC6DF8300BB51C5 /* Main.storyboard */,
 				8BFF552B1DC6DF8300BB51C5 /* Assets.xcassets */,
@@ -248,8 +280,6 @@
 				8BD5EA821DE170CC00A46BD0 /* Particles */,
 				8BD5EA811DE1707F00A46BD0 /* Nodes */,
 				8BD5EA801DE1707100A46BD0 /* PhysicsContactAndCollision */,
-				8B5141F21DE213C8002BAE70 /* GameSceneActiveState.swift */,
-				8B5141F41DE21638002BAE70 /* GameSceneFailState.swift */,
 			);
 			path = "Tiny Against the Giants";
 			sourceTree = "<group>";
@@ -427,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B804B5F1DE7648900F0C534 /* GameScene+Button.swift in Sources */,
 				8BFF55251DC6DF8300BB51C5 /* GameScene.swift in Sources */,
 				8B0099951DDE722E00B52431 /* ChargeBarComponent.swift in Sources */,
 				8B9CCA801DD90FD700A9242C /* Giant.swift in Sources */,
@@ -451,6 +482,7 @@
 				8B5141F31DE213C8002BAE70 /* GameSceneActiveState.swift in Sources */,
 				8BE0B9441DDBACDD00CD65BC /* HudNode.swift in Sources */,
 				8B7F27D41DE1325B0065DC0F /* ContactNotifiable.swift in Sources */,
+				8B804B5D1DE75E9500F0C534 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

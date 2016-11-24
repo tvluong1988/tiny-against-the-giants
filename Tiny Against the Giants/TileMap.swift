@@ -62,7 +62,7 @@ func getRandomPositionNotOnTileGroupInTileMap(tileMap: SKTileMapNode, scene: SKS
   repeat {
     column = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfColumns)
     row = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfRows)
-  } while tileMap.tileGroup(atColumn: column, row: row) != nil
+  } while tileMap.tileDefinition(atColumn: column, row: row) != nil
 
   let tilePosition = tileMap.centerOfTile(atColumn: column, row: row)
   let scenePosition = scene.convert(tilePosition, from: tileMap)

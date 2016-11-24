@@ -24,9 +24,9 @@ class GameScene: SKScene {
   let timerNode = SKLabelNode()
   
   private var lastUpdateTime: TimeInterval = 0
-  private let giantSpawnCooldown: TimeInterval = 3
+  private let giantSpawnCooldown: TimeInterval = 2
   private var giantSpawnTime: TimeInterval = 0
-  private let maxGiantCount = 5
+  private let maxGiantCount = 10
   var currentGiantCount = 0
   
   override func sceneDidLoad() {
@@ -52,6 +52,14 @@ class GameScene: SKScene {
     timerNode.fontSize = 50
     cam.addChild(timerNode)
     
+    stateMachine.enter(GameSceneActiveState.self)
+  }
+  
+  func newGame() {
+    currentGiantCount = 0
+    addBall()
+    addGiant()
+    constraintCameraToPlayer()
     stateMachine.enter(GameSceneActiveState.self)
   }
   
@@ -145,14 +153,17 @@ fileprivate extension GameScene {
   
   func addCamera() {
     cam = SKCameraNode()
-    
-    if let ball = entityManager.entitiesForTeam(team: .Team1).first, let spriteNode = ball.component(ofType: SpriteComponent.self)?.node {
-      let constraint = SKConstraint.distance(SKRange(constantValue: 0), to: spriteNode)
-      cam.constraints = [constraint]
-    }
-    
-    self.camera = cam
+    camera = cam
     addChild(cam)
+    
+    constraintCameraToPlayer()
+  }
+  
+  func constraintCameraToPlayer() {
+    if let ball = entityManager.getPlayerEntity(), let spriteNode = ball.component(ofType: SpriteComponent.self)?.node {
+      let constraint = SKConstraint.distance(SKRange(constantValue: 0), to: spriteNode)
+      camera?.constraints = [constraint]
+    }
   }
   
   func addTileMaps() {
