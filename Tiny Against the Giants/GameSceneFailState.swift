@@ -35,6 +35,10 @@ class GameSceneFailState: GKState {
     retryButton?.removeFromParent()
   }
   
+  override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+    return stateClass is GameSceneActiveState.Type
+  }
+  
   // MARK: Lifecycle
   init(gameScene: GameScene) {
     self.gameScene = gameScene

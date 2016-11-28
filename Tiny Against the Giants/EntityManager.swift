@@ -45,6 +45,8 @@ extension EntityManager {
   func add(entity: GKEntity) {
     entities.insert(entity)
     
+    let worldNode = scene.childNode(withName: "world")
+    
     if let renderNode = entity.component(ofType: RenderComponent.self)?.node {
       let constraint = SKConstraint.zRotation(SKRange.init(constantValue: 0))
       constraint.referenceNode = scene
@@ -58,9 +60,9 @@ extension EntityManager {
         constraint.referenceNode = renderNode
         
         chargeBarNode.constraints = [constraint]
-        scene.addChild(chargeBarNode)
+        worldNode?.addChild(chargeBarNode)
       }
-      scene.addChild(renderNode)
+      worldNode?.addChild(renderNode)
     }
     
     for componentSystem in componentSystems {

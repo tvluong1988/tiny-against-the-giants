@@ -19,6 +19,14 @@ extension GameScene: ButtonRespondable {
       print("You pressed the retry button!")
       entityManager.removeAll()
       newGame()
+    case .pause:
+      print("You pressed the paused button!")
+      if stateMachine.canEnterState(GameScenePauseState.self) {
+        stateMachine.enter(GameScenePauseState.self)
+      }
+    case .resume:
+      print("You pressed the resume button!")
+      stateMachine.enter(GameSceneActiveState.self)
     }
   }
 }

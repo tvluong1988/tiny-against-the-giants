@@ -26,7 +26,9 @@ class GameSceneActiveState: GKState {
   
   override func didEnter(from previousState: GKState?) {
     super.didEnter(from: previousState)
-    time = 0
+    if previousState is GameSceneFailState {
+      time = 0
+    }
   }
   
   // MARK: Lifecycle

@@ -14,9 +14,11 @@ class GameScene: SKScene {
   var entityManager: EntityManager!
   lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
     GameSceneActiveState(gameScene: self),
-    GameSceneFailState(gameScene: self)
+    GameSceneFailState(gameScene: self),
+    GameScenePauseState(gameScene: self)
   ])
   
+  var worldNode = SKNode()
   var previousLandBackground: SKTileMapNode!
   var nextLandBackground: SKTileMapNode!
   var currentLandBackground: SKTileMapNode!
@@ -35,6 +37,9 @@ class GameScene: SKScene {
     physicsWorld.contactDelegate = self
     
     entityManager = EntityManager(scene: self)
+    
+    worldNode.name = "world"
+    addChild(worldNode)
     physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     addTileMaps()
     addNextTileMap()
@@ -51,6 +56,8 @@ class GameScene: SKScene {
     timerNode.position.y = size.height / 2
     timerNode.fontSize = 50
     cam.addChild(timerNode)
+    
+    addPauseButton()
     
     stateMachine.enter(GameSceneActiveState.self)
   }
@@ -78,6 +85,8 @@ class GameScene: SKScene {
   }
   
   override func update(_ currentTime: TimeInterval) {
+    super.update(currentTime)
+    
     if !cam.contains(currentLandBackground) {
       previousLandBackground.removeFromParent()
       previousLandBackground = currentLandBackground
@@ -92,6 +101,11 @@ class GameScene: SKScene {
     
     // Calculate time since last update
     let deltaTime = currentTime - lastUpdateTime
+    lastUpdateTime = currentTime
+    
+    if worldNode.isPaused {
+      return
+    }
     
     giantSpawnTime -= deltaTime
     if giantSpawnTime < 0 && currentGiantCount < maxGiantCount {
@@ -103,9 +117,6 @@ class GameScene: SKScene {
     entityManager.update(deltaTime: deltaTime)
     
     stateMachine.update(deltaTime: deltaTime)
-    
-    lastUpdateTime = currentTime
-
   }
 }
 
@@ -146,7 +157,7 @@ extension GameScene: SKPhysicsContactDelegate {
 fileprivate extension GameScene {
   func addNextTileMap() {
     nextLandBackground = getTileMap()
-    addChild(nextLandBackground)
+    worldNode.addChild(nextLandBackground)
     
     nextLandBackground.position.y = currentLandBackground.frame.minY
   }
@@ -168,9 +179,9 @@ fileprivate extension GameScene {
   
   func addTileMaps() {
     previousLandBackground = getTileMap()
-    addChild(previousLandBackground)
+    worldNode.addChild(previousLandBackground)
     currentLandBackground = getTileMap()
-    addChild(currentLandBackground)
+    worldNode.addChild(currentLandBackground)
   }
   
   func getTileMap() -> SKTileMapNode? {
@@ -204,5 +215,13 @@ fileprivate extension GameScene {
     entityManager.add(entity: giant)
     
     currentGiantCount += 1
+  }
+  
+  func addPauseButton() {
+    let pauseButton = ButtonNode(color: UIColor.orange, size: CGSize(width: 40, height: 40))
+    pauseButton.isUserInteractionEnabled = true
+    pauseButton.name = "pause"
+    pauseButton.position = timerNode.position.applying(CGAffineTransform(translationX: -150, y: 0))
+    cam.addChild(pauseButton)
   }
 }

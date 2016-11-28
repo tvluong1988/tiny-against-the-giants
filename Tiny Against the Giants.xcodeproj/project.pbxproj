@@ -28,6 +28,7 @@
 		8B9CCA821DD911C900A9242C /* MoveBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA811DD911C900A9242C /* MoveBehavior.swift */; };
 		8B9CCA841DD912DD00A9242C /* MoveComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA831DD912DD00A9242C /* MoveComponent.swift */; };
 		8B9CCA861DD9149400A9242C /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9CCA851DD9149400A9242C /* Util.swift */; };
+		8BAF400F1DEBA4C000606D24 /* GameScenePauseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAF400E1DEBA4C000606D24 /* GameScenePauseState.swift */; };
 		8BE0B93E1DDBA4DF00CD65BC /* ParticleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0B93D1DDBA4DF00CD65BC /* ParticleComponent.swift */; };
 		8BE0B9401DDBA78600CD65BC /* Fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BE0B93F1DDBA78600CD65BC /* Fire.sks */; };
 		8BE0B9421DDBA9C900CD65BC /* Magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8BE0B9411DDBA9C900CD65BC /* Magic.sks */; };
@@ -82,6 +83,7 @@
 		8B9CCA811DD911C900A9242C /* MoveBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveBehavior.swift; sourceTree = "<group>"; };
 		8B9CCA831DD912DD00A9242C /* MoveComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveComponent.swift; sourceTree = "<group>"; };
 		8B9CCA851DD9149400A9242C /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		8BAF400E1DEBA4C000606D24 /* GameScenePauseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScenePauseState.swift; sourceTree = "<group>"; };
 		8BE0B93D1DDBA4DF00CD65BC /* ParticleComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleComponent.swift; sourceTree = "<group>"; };
 		8BE0B93F1DDBA78600CD65BC /* Fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Fire.sks; sourceTree = "<group>"; };
 		8BE0B9411DDBA9C900CD65BC /* Magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Magic.sks; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				8B5141F21DE213C8002BAE70 /* GameSceneActiveState.swift */,
 				8B5141F41DE21638002BAE70 /* GameSceneFailState.swift */,
+				8BAF400E1DEBA4C000606D24 /* GameScenePauseState.swift */,
 			);
 			name = GameSceneStates;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				8B9CCA801DD90FD700A9242C /* Giant.swift in Sources */,
 				8B9CCA7E1DD8F6FC00A9242C /* TeamComponent.swift in Sources */,
 				8B9CCA861DD9149400A9242C /* Util.swift in Sources */,
+				8BAF400F1DEBA4C000606D24 /* GameScenePauseState.swift in Sources */,
 				8B7408D71DD53304004139E7 /* NoiseMap.swift in Sources */,
 				8B9CCA821DD911C900A9242C /* MoveBehavior.swift in Sources */,
 				8BFA3E151DE00BFF00E4DFF7 /* ColliderType.swift in Sources */,
