@@ -23,4 +23,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // MARK: Properties
   let appID = "ca-app-pub-9051260803045362~7653644730"
 }
-

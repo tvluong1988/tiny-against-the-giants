@@ -35,4 +35,3 @@ func getCheckerboardPerlinNoiseMap(squareSize: Double, frequency: Double) -> GKN
   let combinedNoise = GKNoise(componentNoises: [checkerboardNoise, perlinNoise], selectionNoise: perlinNoise)
   return GKNoiseMap(combinedNoise)
 }
-

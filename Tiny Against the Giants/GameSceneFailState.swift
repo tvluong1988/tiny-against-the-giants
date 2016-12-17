@@ -19,7 +19,6 @@ class GameSceneFailState: GKState {
         physicBody.isDynamic = false
     }
   
-    
     if let entity = gameScene.entityManager.getPlayerEntity(),
       let node = entity.component(ofType: RenderComponent.self)?.node {
       let retryButton = buildRetryButton()

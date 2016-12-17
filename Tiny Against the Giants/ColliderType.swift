@@ -28,8 +28,7 @@ extension ColliderType {
   }
   
   var collisionMask: UInt32 {
-    let mask = ColliderType.definedCollisions[self]?.reduce(ColliderType()) {
-      initial, colliderType in
+    let mask = ColliderType.definedCollisions[self]?.reduce(ColliderType()) { initial, colliderType in
       return initial.union(colliderType)
     }
     
@@ -37,8 +36,7 @@ extension ColliderType {
   }
   
   var contactMask: UInt32 {
-    let mask = ColliderType.requestedContactNotifications[self]?.reduce(ColliderType()) {
-      initial, colliderType in
+    let mask = ColliderType.requestedContactNotifications[self]?.reduce(ColliderType()) { initial, colliderType in
       return initial.union(colliderType)
     }
     

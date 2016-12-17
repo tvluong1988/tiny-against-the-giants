@@ -19,6 +19,7 @@
 		8B7408D91DD5334A004139E7 /* TileMapPhysics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */; };
 		8B7408DB1DD5343E004139E7 /* TileMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7408DA1DD5343E004139E7 /* TileMap.swift */; };
 		8B7ED5551E05D64700B526FF /* GameSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7ED5541E05D64700B526FF /* GameSceneDelegate.swift */; };
+		8B7ED55B1E05E2D600B526FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8B7ED55A1E05E2D600B526FF /* .swiftlint.yml */; };
 		8B7F27D41DE1325B0065DC0F /* ContactNotifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */; };
 		8B804B5D1DE75E9500F0C534 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804B5C1DE75E9500F0C534 /* ButtonNode.swift */; };
 		8B804B5F1DE7648900F0C534 /* GameScene+Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B804B5E1DE7648900F0C534 /* GameScene+Button.swift */; };
@@ -77,6 +78,7 @@
 		8B7408D81DD5334A004139E7 /* TileMapPhysics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMapPhysics.swift; sourceTree = "<group>"; };
 		8B7408DA1DD5343E004139E7 /* TileMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileMap.swift; sourceTree = "<group>"; };
 		8B7ED5541E05D64700B526FF /* GameSceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneDelegate.swift; sourceTree = "<group>"; };
+		8B7ED55A1E05E2D600B526FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8B7F27D31DE1325B0065DC0F /* ContactNotifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactNotifiable.swift; sourceTree = "<group>"; };
 		8B804B5C1DE75E9500F0C534 /* ButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		8B804B5E1DE7648900F0C534 /* GameScene+Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameScene+Button.swift"; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		8BFF55121DC6DF8300BB51C5 = {
 			isa = PBXGroup;
 			children = (
+				8B7ED55A1E05E2D600B526FF /* .swiftlint.yml */,
 				8BFF551D1DC6DF8300BB51C5 /* Tiny Against the Giants */,
 				8BFF55381DC6DF8300BB51C5 /* Tiny Against the GiantsTests */,
 				8BFF55431DC6DF8300BB51C5 /* Tiny Against the GiantsUITests */,
@@ -458,6 +461,7 @@
 				8BFF552A1DC6DF8300BB51C5 /* Main.storyboard in Resources */,
 				8BFF552C1DC6DF8300BB51C5 /* Assets.xcassets in Resources */,
 				8BE0B9421DDBA9C900CD65BC /* Magic.sks in Resources */,
+				8B7ED55B1E05E2D600B526FF /* .swiftlint.yml in Resources */,
 				8BE0B9401DDBA78600CD65BC /* Fire.sks in Resources */,
 				8BFF552F1DC6DF8300BB51C5 /* LaunchScreen.storyboard in Resources */,
 				8B838F461DC6F6A5007B70F0 /* BasicTile.sks in Resources */,

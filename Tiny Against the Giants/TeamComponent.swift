@@ -25,7 +25,7 @@ enum Team: Int {
 }
 
 class TeamComponent: GKComponent {
-  // MARK:
+  // MARK: Lifecycle
   init(team: Team) {
     self.team = team
     super.init()

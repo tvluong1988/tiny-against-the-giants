@@ -13,9 +13,7 @@ protocol ButtonRespondable {
 }
 
 enum ButtonIdentifier: String {
-  case retry = "retry"
-  case pause = "pause"
-  case resume = "resume"
+  case retry, pause, resume
   
   static let all: [ButtonIdentifier] = [.retry, .pause, .resume]
 }

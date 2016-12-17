@@ -18,8 +18,7 @@ class GameSceneActiveState: GKState {
     
     if let playerEntity = gameScene.entityManager.entitiesForTeam(team: .Team1).first,
       let percentageCharge = playerEntity.component(ofType: ChargeBarComponent.self)?.percentageCharge,
-      percentageCharge.isZero
-      {
+      percentageCharge.isZero {
       stateMachine?.enter(GameSceneFailState.self)
     }
   }

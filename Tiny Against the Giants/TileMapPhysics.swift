@@ -17,7 +17,6 @@ func getPhysicsBodyFromTileDefinition(tileDefinition: SKTileDefinition, center: 
   let scaleXHalfTransform = CGAffineTransform(scaleX: 0.5, y: 1.0)
   let scaleByHalfTransform = CGAffineTransform(scaleX: 0.5, y: 0.5)
   
-  
   switch tileDefinition.name! {
   case "CenterCenter":
     tileDefinitionPhysicsBody = SKPhysicsBody(rectangleOf: tileSize, center: center)

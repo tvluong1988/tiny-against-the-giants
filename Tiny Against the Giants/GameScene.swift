@@ -11,7 +11,7 @@ import GameplayKit
 
 class GameScene: SKScene {
   
-  var gameSceneDelegate: GameSceneDelegate?
+  weak var gameSceneDelegate: GameSceneDelegate?
   
   var entityManager: EntityManager!
   lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
@@ -133,7 +133,6 @@ extension GameScene {
     physicsWorld.speed = 1.0
   }
 }
-
 
 extension GameScene: SKPhysicsContactDelegate {
   func didBegin(_ contact: SKPhysicsContact) {

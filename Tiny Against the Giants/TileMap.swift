@@ -8,7 +8,6 @@
 
 import GameplayKit
 
-
 func getLandBackground() -> SKTileMapNode? {
   var tileMap: SKTileMapNode?
   if let tileSet = SKTileSet(named: "BasicTile") {
@@ -54,7 +53,6 @@ func getRandomPositionInTileMap(tileMap: SKTileMapNode) -> CGPoint {
   let row = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfRows)
   return tileMap.centerOfTile(atColumn: column, row: row)
 }
-
 
 func getRandomPositionNotOnTileGroupInTileMap(tileMap: SKTileMapNode, scene: SKScene) -> CGPoint {
   var column: Int
