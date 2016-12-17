@@ -27,6 +27,7 @@ class GameSceneFailState: GKState {
       gameScene.addChild(retryButton)
     }
 
+    gameScene.gameSceneDelegate?.didEnteredFailState()
   }
   
   override func willExit(to nextState: GKState) {

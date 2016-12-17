@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene {
   
+  var gameSceneDelegate: GameSceneDelegate?
+  
   var entityManager: EntityManager!
   lazy var stateMachine: GKStateMachine = GKStateMachine(states: [
     GameSceneActiveState(gameScene: self),
@@ -119,6 +121,19 @@ class GameScene: SKScene {
     stateMachine.update(deltaTime: deltaTime)
   }
 }
+
+extension GameScene {
+  func gamePause() {
+    worldNode.isPaused = true
+    physicsWorld.speed = 0
+  }
+  
+  func gameResume() {
+    worldNode.isPaused = false
+    physicsWorld.speed = 1.0
+  }
+}
+
 
 extension GameScene: SKPhysicsContactDelegate {
   func didBegin(_ contact: SKPhysicsContact) {

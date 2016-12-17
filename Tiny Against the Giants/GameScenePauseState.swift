@@ -19,8 +19,7 @@ class GameScenePauseState: GKState {
       gameScene.addChild(pauseButton)
     }
 
-    gameScene.physicsWorld.speed = 0
-    gameScene.worldNode.isPaused = true
+    gameScene.gamePause()
   }
   
   override func willExit(to nextState: GKState) {
@@ -28,8 +27,7 @@ class GameScenePauseState: GKState {
     let pauseButton = gameScene.childNode(withName: ButtonIdentifier.resume.rawValue) as? ButtonNode
     pauseButton?.removeFromParent()
     
-    gameScene.physicsWorld.speed = 1
-    gameScene.worldNode.isPaused = false
+    gameScene.gameResume()
   }
   
   override func isValidNextState(_ stateClass: AnyClass) -> Bool {

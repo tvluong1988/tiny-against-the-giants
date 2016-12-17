@@ -19,11 +19,12 @@ class GameViewController: UIViewController {
     interstitialAd = createAndLoadInterstititial()
     
     let ipadLandscape = CGSize(width: 1366, height: 1024)
-    let scene = GameScene(size: ipadLandscape)
-    scene.scaleMode = .aspectFill
+    gameScene = GameScene(size: ipadLandscape)
+    gameScene.gameSceneDelegate = self
+    gameScene.scaleMode = .aspectFill
         
     if let view = self.view as! SKView? {
-      view.presentScene(scene)
+      view.presentScene(gameScene)
           
       view.ignoresSiblingOrder = true
           
@@ -55,8 +56,21 @@ class GameViewController: UIViewController {
   }
   
   // MARK: Properties
+  var gameScene: GameScene!
   var interstitialAd: GADInterstitial!
   let adUnitID = "ca-app-pub-9051260803045362/9130377939"
+}
+
+extension GameViewController: GameSceneDelegate {
+  func didEnteredFailState() {
+    if interstitialAd.isReady {
+      gameScene.gamePause()
+      interstitialAd.present(fromRootViewController: self)
+      print("Ad was shown!")
+    } else {
+      print("Ad was not ready...")
+    }
+  }
 }
 
 extension GameViewController: GADInterstitialDelegate {
@@ -70,12 +84,12 @@ extension GameViewController: GADInterstitialDelegate {
   }
   
   func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+    gameScene.gameResume()
     interstitialAd = createAndLoadInterstititial()
   }
   
   func interstitialDidReceiveAd(_ ad: GADInterstitial) {
     print("Did received ad successfully!")
-    interstitialAd.present(fromRootViewController: self)
   }
   
   func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
