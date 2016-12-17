@@ -9,7 +9,6 @@ pod 'Nimble'
 end
 
 target 'Tiny Against the Giants' do
-pod 'FBAudienceNetwork'
 pod 'Google-Mobile-Ads-SDK'
 
 target 'Tiny Against the GiantsTests' do
