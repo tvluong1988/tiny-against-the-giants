@@ -9,11 +9,14 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import GoogleMobileAds
 
 class GameViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    interstitialAd = createAndLoadInterstititial()
     
     let ipadLandscape = CGSize(width: 1366, height: 1024)
     let scene = GameScene(size: ipadLandscape)
@@ -49,5 +52,33 @@ class GameViewController: UIViewController {
   
   override var prefersStatusBarHidden: Bool {
     return true
+  }
+  
+  // MARK: Properties
+  var interstitialAd: GADInterstitial!
+  let adUnitID = "ca-app-pub-9051260803045362/9130377939"
+}
+
+extension GameViewController: GADInterstitialDelegate {
+  func createAndLoadInterstititial() -> GADInterstitial {
+    let interstitial = GADInterstitial(adUnitID: adUnitID)
+    interstitial.delegate = self
+    let request = GADRequest()
+    request.testDevices = [kGADSimulatorID]
+    interstitial.load(request)
+    return interstitial
+  }
+  
+  func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+    interstitialAd = createAndLoadInterstititial()
+  }
+  
+  func interstitialDidReceiveAd(_ ad: GADInterstitial) {
+    print("Did received ad successfully!")
+    interstitialAd.present(fromRootViewController: self)
+  }
+  
+  func interstitialDidFail(toPresentScreen ad: GADInterstitial) {
+    print("Failed to receive ad...")
   }
 }

@@ -1,0 +1,6 @@
+framework module Pods_Tiny_Against_the_GiantsTests {
+  umbrella header "Pods-Tiny Against the GiantsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
