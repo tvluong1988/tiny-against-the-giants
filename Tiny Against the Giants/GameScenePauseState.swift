@@ -14,9 +14,9 @@ class GameScenePauseState: GKState {
     super.didEnter(from: previousState)
     if let entity = gameScene.entityManager.getPlayerEntity(),
       let node = entity.component(ofType: RenderComponent.self)?.node {
-      let pauseButton = buildPauseButton()
-      pauseButton.position = node.position.applying(CGAffineTransform(translationX: 0, y: 100))
-      gameScene.addChild(pauseButton)
+      let resumeButton = buildResumeButton()
+      resumeButton.position = node.position.applying(CGAffineTransform(translationX: 0, y: 100))
+      gameScene.addChild(resumeButton)
     }
 
     gameScene.gamePause()
@@ -24,8 +24,8 @@ class GameScenePauseState: GKState {
   
   override func willExit(to nextState: GKState) {
     super.willExit(to: nextState)
-    let pauseButton = gameScene.childNode(withName: ButtonIdentifier.resume.rawValue) as? ButtonNode
-    pauseButton?.removeFromParent()
+    let resumeButton = gameScene.childNode(withName: ButtonIdentifier.resume.rawValue) as? ButtonNode
+    resumeButton?.removeFromParent()
     
     gameScene.gameResume()
   }
@@ -45,10 +45,10 @@ class GameScenePauseState: GKState {
 }
 
 extension GameScenePauseState {
-  func buildPauseButton() -> ButtonNode {
-    let pauseButton = ButtonNode(color: UIColor.purple, size: CGSize(width: 50, height: 50))
-    pauseButton.name = "resume"
-    pauseButton.isUserInteractionEnabled = true
-    return pauseButton
+  func buildResumeButton() -> ButtonNode {
+    let resumeButton = ButtonNode(imageNamed: "Resume")
+    resumeButton.name = ButtonIdentifier.resume.rawValue
+    resumeButton.isUserInteractionEnabled = true
+    return resumeButton
   }
 }

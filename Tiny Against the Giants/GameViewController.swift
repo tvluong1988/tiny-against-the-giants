@@ -21,16 +21,19 @@ class GameViewController: UIViewController {
     let ipadLandscape = CGSize(width: 1366, height: 1024)
     gameScene = GameScene(size: ipadLandscape)
     gameScene.gameSceneDelegate = self
-    gameScene.scaleMode = .aspectFill
-        
-    if let view = self.view as! SKView? {
-      view.presentScene(gameScene)
-          
-      view.ignoresSiblingOrder = true
-          
-      view.showsFPS = true
-      view.showsNodeCount = true
-      view.showsPhysics = true
+    gameScene.scaleMode = .resizeFill
+    
+    let skView = view as! SKView
+    skView.presentScene(gameScene)
+    skView.ignoresSiblingOrder = true
+    skView.showsFPS = true
+    skView.showsNodeCount = true
+    skView.showsPhysics = true
+  }
+  
+  override func viewDidLayoutSubviews() {
+    if gameScene.size != view.bounds.size {
+      gameScene.size = view.bounds.size
     }
   }
   

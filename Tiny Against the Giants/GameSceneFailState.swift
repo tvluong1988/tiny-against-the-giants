@@ -51,8 +51,8 @@ class GameSceneFailState: GKState {
 
 extension GameSceneFailState {
   func buildRetryButton() -> ButtonNode {
-    let retryButton = ButtonNode(color: UIColor.blue, size: CGSize(width: 80, height: 80))
-    retryButton.name = "retry"
+    let retryButton = ButtonNode(imageNamed: "PlayAgain")
+    retryButton.name = ButtonIdentifier.retry.rawValue
     retryButton.isUserInteractionEnabled = true
     return retryButton
   }

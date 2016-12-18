@@ -26,6 +26,7 @@ class GameScene: SKScene {
   var currentLandBackground: SKTileMapNode!
   var cam: SKCameraNode!
   let timerNode = SKLabelNode()
+  let pauseButton = ButtonNode(imageNamed: "Pause")
   
   private var lastUpdateTime: TimeInterval = 0
   private let giantSpawnCooldown: TimeInterval = 2
@@ -55,13 +56,21 @@ class GameScene: SKScene {
   override func didMove(to view: SKView) {
     timerNode.horizontalAlignmentMode = .center
     timerNode.verticalAlignmentMode = .top
-    timerNode.position.y = size.height / 2
     timerNode.fontSize = 50
+    timerNode.position.y = size.height / 2 - timerNode.frame.size.height / 2
     cam.addChild(timerNode)
     
-    addPauseButton()
+    addPauseButton(view: view)
     
     stateMachine.enter(GameSceneActiveState.self)
+  }
+  
+  override func didChangeSize(_ oldSize: CGSize) {
+    super.didChangeSize(oldSize)
+    timerNode.position.y = size.height / 2 - timerNode.frame.size.height / 2
+    
+    pauseButton.position.x = -size.width / 2
+    pauseButton.position.y = size.height / 2
   }
   
   func newGame() {
@@ -231,11 +240,10 @@ fileprivate extension GameScene {
     currentGiantCount += 1
   }
   
-  func addPauseButton() {
-    let pauseButton = ButtonNode(color: UIColor.orange, size: CGSize(width: 40, height: 40))
+  func addPauseButton(view: SKView) {
     pauseButton.isUserInteractionEnabled = true
-    pauseButton.name = "pause"
-    pauseButton.position = timerNode.position.applying(CGAffineTransform(translationX: -150, y: 0))
+    pauseButton.name = ButtonIdentifier.pause.rawValue
+    pauseButton.anchorPoint = CGPoint(x: 0, y: 1)
     cam.addChild(pauseButton)
   }
 }
