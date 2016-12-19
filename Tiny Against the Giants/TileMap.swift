@@ -48,6 +48,18 @@ func getTileMapFilled() -> SKTileMapNode? {
   return tileMap
 }
 
+func getSandTileMapFilled() -> SKTileMapNode? {
+  var tileMap: SKTileMapNode?
+  if let tileSet = SKTileSet(named: "Sand") {
+    let tileSize = CGSize(width: 32, height: 32)
+    tileMap = SKTileMapNode(tileSet: tileSet, columns: 42, rows: 32, tileSize: tileSize)
+    tileMap?.position = CGPoint.zero
+    tileMap?.fill(with: tileSet.tileGroups.first!)
+  }
+  
+  return tileMap
+}
+
 func getRandomPositionInTileMap(tileMap: SKTileMapNode) -> CGPoint {
   let column = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfColumns)
   let row = GKRandomSource.sharedRandom().nextInt(upperBound: tileMap.numberOfRows)

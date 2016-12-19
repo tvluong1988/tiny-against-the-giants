@@ -24,6 +24,10 @@ class GameScene: SKScene {
   var previousLandBackground: SKTileMapNode!
   var nextLandBackground: SKTileMapNode!
   var currentLandBackground: SKTileMapNode!
+  var previousSandBackground: SKTileMapNode!
+  var currentSandBackground: SKTileMapNode!
+  var nextSandBackground: SKTileMapNode!
+
   var cam: SKCameraNode!
   let timerNode = SKLabelNode()
   let pauseButton = ButtonNode(imageNamed: "Pause")
@@ -44,6 +48,8 @@ class GameScene: SKScene {
     worldNode.name = "world"
     addChild(worldNode)
     physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+    addSandTileMaps()
+    addNextSandTileMap()
     addTileMaps()
     addNextTileMap()
     addBall()
@@ -54,6 +60,8 @@ class GameScene: SKScene {
   }
   
   override func didMove(to view: SKView) {
+    constraintCameraToPlayer()
+
     timerNode.horizontalAlignmentMode = .center
     timerNode.verticalAlignmentMode = .top
     timerNode.fontSize = 50
@@ -99,6 +107,11 @@ class GameScene: SKScene {
     super.update(currentTime)
     
     if !cam.contains(currentLandBackground) {
+      previousSandBackground.removeFromParent()
+      previousSandBackground = currentSandBackground
+      currentSandBackground = nextSandBackground
+      addNextSandTileMap()
+      
       previousLandBackground.removeFromParent()
       previousLandBackground = currentLandBackground
       currentLandBackground = nextLandBackground
@@ -185,18 +198,33 @@ fileprivate extension GameScene {
     nextLandBackground.position.y = currentLandBackground.frame.minY
   }
   
+  func addNextSandTileMap() {
+    nextSandBackground = getSandTileMap()
+    worldNode.addChild(nextSandBackground)
+    
+    nextSandBackground.position.y = currentSandBackground.frame.minY
+  }
+  
   func addCamera() {
     cam = SKCameraNode()
     camera = cam
     addChild(cam)
-    
-    constraintCameraToPlayer()
   }
   
   func constraintCameraToPlayer() {
-    if let ball = entityManager.getPlayerEntity(), let spriteNode = ball.component(ofType: SpriteComponent.self)?.node {
+    if let camera = camera, let ball = entityManager.getPlayerEntity(), let spriteNode = ball.component(ofType: SpriteComponent.self)?.node {
       let constraint = SKConstraint.distance(SKRange(constantValue: 0), to: spriteNode)
-      camera?.constraints = [constraint]
+      
+      let scaledSize = CGSize(width: size.width * camera.xScale, height: size.height * camera.yScale)
+      let inset: CGFloat = 100.0
+      let xLowerLimit = scaledSize.width / 2 - inset
+      let xUpperLimit = currentSandBackground.mapSize.width - scaledSize.width / 2 + inset
+      let xRange = SKRange(lowerLimit: xLowerLimit, upperLimit: xUpperLimit)
+      
+      let yUpperLimit = -scaledSize.height / 2 + inset
+      let yRange = SKRange(upperLimit: yUpperLimit)
+      let edgeContraint = SKConstraint.positionX(xRange, y: yRange)
+      camera.constraints = [constraint, edgeContraint]
     }
   }
   
@@ -205,6 +233,13 @@ fileprivate extension GameScene {
     worldNode.addChild(previousLandBackground)
     currentLandBackground = getTileMap()
     worldNode.addChild(currentLandBackground)
+  }
+  
+  func addSandTileMaps() {
+    previousSandBackground = getSandTileMap()
+    worldNode.addChild(previousSandBackground)
+    currentSandBackground = getSandTileMap()
+    worldNode.addChild(currentSandBackground)
   }
   
   func getTileMap() -> SKTileMapNode? {
@@ -217,6 +252,15 @@ fileprivate extension GameScene {
     tileMap.physicsBody?.collisionBitMask = ColliderType.Obstacle.collisionMask
     tileMap.physicsBody?.isDynamic = false
   
+    return tileMap
+  }
+  
+  func getSandTileMap() -> SKTileMapNode? {
+    var tileMap: SKTileMapNode!
+    tileMap = getSandTileMapFilled()
+    tileMap.anchorPoint = CGPoint(x: 0, y: 1)
+    tileMap.position = CGPoint.zero
+    
     return tileMap
   }
   
